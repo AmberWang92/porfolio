@@ -98,11 +98,27 @@
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 0;
+            background: #f5f5f7;
+            border-radius: 50px;
+            padding: 4px;
+        }
+
+        .nav-links a {
+            padding: 10px 24px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            color: #1d1d1f;
         }
 
         .nav-links a:hover {
-            color: var(--accent-color);
+            background: rgba(0, 0, 0, 0.04);
+        }
+
+        .nav-links a.active {
+            background: #1d1d1f;
+            color: #fff;
         }
 
         /* --- 4. Hero 区域 (Hero Section) --- */
@@ -259,7 +275,7 @@
             <nav>
                 <a href="#" class="logo">Xinyue Wang</a>
                 <ul class="nav-links">
-                    <li><a href="#about">About</a></li>
+                    <li><a href="#about" class="active">About</a></li>
                     <li><a href="#resume">Resume</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#contact">Contact</a></li>
@@ -272,7 +288,7 @@
     <section class="hero">
         <div class="container hero-content">
             <h1>Hello, I'm Xinyue Wang</h1>
-            <p>Designer / Developer / Creative</p>
+            <p>Game Designer / Game Developer / Creative</p>
             <a href="#portfolio" class="btn">View My Work</a>
         </div>
     </section>
@@ -283,16 +299,13 @@
         <div class="about-content">
             <!-- Placeholder: Please replace src with your real photo path -->
             <div class="profile-img">
-                <img src="https://via.placeholder.com/400x400?text=Photo" alt="Xinyue Wang"
+                <img src="pictures/bio.jpeg" alt="Xinyue Wang"
                     style="width:100%; height:100%; object-fit:cover; border-radius:10px;">
             </div>
             <div>
-                <p>This is your personal bio. You can introduce your background, the fields you are passionate about,
-                    and your career goals. For example:</p>
-                <br>
-                <p>I am a passionate designer focusing on user experience and visual communication. I love solving
-                    complex problems through design and creating digital products that are both beautiful and
-                    functional. Over the past few years, I have participated in multiple cross-platform projects...</p>
+                <p>Hi, I’m Xinyue Wang, Game Developer. I’m focusing on creating immersive and engaging gaming
+                    experiences. This portfolio showcases my projects, highlighting my love for storytelling, innovative
+                    design, and gameplay. Let’s explore these creative worlds together!...</p>
             </div>
         </div>
     </section>
@@ -331,15 +344,15 @@
             <!-- Project 1 -->
             <article class="project-card">
                 <div class="project-img">
-                    <img src="https://via.placeholder.com/600x400?text=Project+1" alt="Project 1"
+                    <img src="pictures/project_Farmageddon.png" alt="Farmageddon"
                         style="width:100%; height:100%; object-fit:cover;">
                 </div>
                 <div class="project-info">
-                    <h3>Project Title A</h3>
-                    <p>Brief project description. What problem did this project solve? What technologies or tools did
-                        you use?</p>
+                    <h3>Until the Fields: Farmageddon</h3>
+                    <p>A single-player 3D platformer puzzle game developed by a team of six women over 3.5 months has
+                        been released on Steam.</p>
                     <br>
-                    <a href="#">View Details &rarr;</a>
+                    <a href="projects.html">View Details &rarr;</a>
                 </div>
             </article>
 

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Name - Xinyue Wang</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --text-color: #333333;
+            --bg-color: #ffffff;
+            --light-bg: #f9f9f9;
+            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --spacing-unit: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--bg-color);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0;
+            background: #f5f5f7;
+            border-radius: 50px;
+            padding: 4px;
+        }
+
+        .nav-links a {
+            padding: 10px 24px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            color: #1d1d1f;
+        }
+
+        .nav-links a:hover {
+            background: rgba(0, 0, 0, 0.04);
+        }
+
+        .nav-links a.active {
+            background: #1d1d1f;
+            color: #fff;
+        }
+
+        .back-link {
+            color: var(--accent-color);
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin: 30px 0;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        .project-header {
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+
+        .project-title {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .project-subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .tag {
+            background: var(--accent-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .game-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .game-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .game-link-btn:hover {
+            background: #1a252f;
+            transform: translateY(-2px);
+        }
+
+        .game-link-btn.steam {
+            background: #171a21;
+        }
+
+        .game-link-btn.itch {
+            background: #fa5c5c;
+        }
+
+        .video-section {
+            padding: 40px 0;
+            background: var(--light-bg);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .description-section {
+            padding: 60px 0;
+        }
+
+        .section-heading {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        .description-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 40px;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .media-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .media-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .media-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .media-caption {
+            padding: 15px;
+            background: white;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+        }
+
+        .code-section {
+            padding: 60px 0;
+            background: var(--light-bg);
+        }
+
+        .code-snippet {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .code-snippet pre {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .code-caption {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        footer {
+            background: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .game-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Xinyue Wang</a>
+                <ul class="nav-links">
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#resume">Resume</a></li>
+                    <li><a href="index.html#portfolio" class="active">Portfolio</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <a href="index.html#portfolio" class="back-link">
+                ← Back to Portfolio
+            </a>
+        </div>
+
+        <section class="video-section">
+            <div class="container">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/nkQzMorvYII?si=LlvQNbx23L6wuHo3"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-header">
+            <div class="container">
+                <h1 class="project-title">Until the Fields: Farmageddon</h1>
+                <p class="project-subtitle">A 3D Platformer Puzzle Game</p>
+
+                <div class="tags-container">
+                    <span class="tag">Unity</span>
+                    <span class="tag">C#</span>
+                    <span class="tag">3D Modeling</span>
+                    <span class="tag">Game Design</span>
+                    <span class="tag">Level Design</span>
+                    <span class="tag">Puzzle Mechanics</span>
+                </div>
+
+                <div class="game-links">
+                    <a href="https://store.steampowered.com/your-game" target="_blank" class="game-link-btn steam">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                        </svg>
+                        Play on Steam
+                    </a>
+                    <a href="https://your-username.itch.io/your-game" target="_blank" class="game-link-btn itch">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18L19.82 8 12 11.82 4.18 8 12 4.18zM4 9.82l7 3.5v6.86l-7-3.5V9.82zm16 0v6.86l-7 3.5v-6.86l7-3.5z" />
+                        </svg>
+                        Play on Itch.io
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="description-section">
+            <div class="container">
+                <h2 class="section-heading">About the Project</h2>
+                <div class="description-text">
+                    <p>
+                        Until the Fields: Farmageddon is a single-player 3D platformer puzzle game developed by a team
+                        of six women over three and a half months. The game combines challenging platforming mechanics
+                        with intricate puzzle-solving elements, creating an engaging and immersive experience.
+                    </p>
+                    <br>
+                    <p>
+                        Players navigate through beautifully crafted farm environments, solving puzzles and overcoming
+                        obstacles to progress through the story. The game features unique mechanics that blend
+                        traditional platforming with innovative puzzle design, offering a fresh take on the genre.
+                    </p>
+                    <br>
+                    <p>
+                        As the [Your Role - e.g., Lead Designer/Programmer], I was responsible for [describe your
+                        specific contributions - e.g., designing core gameplay mechanics, implementing the puzzle
+                        system, creating level layouts, etc.]. This project taught me valuable lessons about team
+                        collaboration, iterative design, and the importance of player feedback.
+                    </p>
+                </div>
+
+                <h2 class="section-heading">Screenshots</h2>
+                <div class="media-grid">
+                    <div class="media-item">
+                        <img src="pictures/screenshot1.jpg" alt="Gameplay Screenshot 1">
+                        <div class="media-caption">Main gameplay area with puzzle elements</div>
+                    </div>
+                    <div class="media-item">
+                        <img src="pictures/screenshot2.jpg" alt="Gameplay Screenshot 2">
+                        <div class="media-caption">Platforming section with environmental hazards</div>
+                    </div>
+                    <div class="media-item">
+                        <img src="pictures/screenshot3.jpg" alt="Gameplay Screenshot 3">
+                        <div class="media-caption">Puzzle mechanic demonstration</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="code-section">
+            <div class="container">
+                <h2 class="section-heading">Code Highlights</h2>
+
+                <div class="code-snippet">
+                    <pre><code>// Player Movement Controller
+public class PlayerController : MonoBehaviour
+{
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float jumpForce = 10f;
+    private Rigidbody rb;
+    private bool isGrounded;
+
+    void Start()
+    {
+        rb = GetComponent&lt;Rigidbody&gt;();
+    }
+
+    void Update()
+    {
+        HandleMovement();
+        HandleJump();
+    }
+
+    private void HandleMovement()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        
+        Vector3 movement = new Vector3(horizontal, 0f, vertical);
+        transform.Translate(movement * moveSpeed * Time.deltaTime);
+    }
+
+    private void HandleJump()
+    {
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+    }
+}</code></pre>
+                </div>
+                <p class="code-caption">Core player movement system with smooth controls and jump mechanics</p>
+
+                <div class="code-snippet">
+                    <pre><code>// Puzzle Interaction System
+public class PuzzleElement : MonoBehaviour
+{
+    [SerializeField] private PuzzleType puzzleType;
+    [SerializeField] private GameObject targetObject;
+    private bool isActivated = false;
+
+    public void Activate()
+    {
+        if (!isActivated)
+        {
+            isActivated = true;
+            TriggerPuzzleEffect();
+            PuzzleManager.Instance.CheckPuzzleCompletion();
+        }
+    }
+
+    private void TriggerPuzzleEffect()
+    {
+        switch (puzzleType)
+        {
+            case PuzzleType.Platform:
+                targetObject.GetComponent&lt;MovingPlatform&gt;().Activate();
+                break;
+            case PuzzleType.Door:
+                targetObject.GetComponent&lt;Door&gt;().Open();
+                break;
+        }
+    }
+}</code></pre>
+                </div>
+                <p class="code-caption">Modular puzzle system allowing for flexible level design</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <p style="margin: 20px 0;">Interested in collaboration or want to chat about game development?</p>
+            <p>Email: xinyue.wang@example.com</p>
+            <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.7;">&copy; 2024 Xinyue Wang. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
