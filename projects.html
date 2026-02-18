@@ -336,6 +336,27 @@
             gap: 10px;
         }
 
+        .dropdown-leading-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.3em;
+            height: 1.3em;
+            color: #1d46a4;
+            flex-shrink: 0;
+        }
+
+        .dropdown-leading-icon svg {
+            width: 1.3em;
+            height: 1.3em;
+            display: block;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
         .accordion-icon {
             font-size: 20px;
             line-height: 1;
@@ -409,6 +430,12 @@
             background: #eef6ff;
         }
 
+        .sub-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .sub-icon {
             transition: transform 0.25s ease;
         }
@@ -450,6 +477,25 @@
             font-family: 'Courier New', Courier, monospace;
             font-size: 0.9rem;
             line-height: 1.5;
+        }
+
+        /* Visual Studio C# syntax highlighting */
+        .code-snippet .keyword {
+            color: #569cd6;
+            font-weight: normal;
+        }
+
+        .code-snippet .type {
+            color: #4ec9b0;
+        }
+
+        .code-snippet .method {
+            color: #dcdcaa;
+        }
+
+        .code-snippet .comment {
+            color: #6a9955;
+            font-style: italic;
         }
 
         .code-caption {
@@ -556,7 +602,8 @@
                     <br>
                     <p>
                         The game is a student project developed by a team of <strong>6 women</strong> over <strong>3.5
-                            months</strong>.
+                            months</strong>. I spend more than <strong>500 hours</strong> on this project.
+
                     </p>
                     <br>
 
@@ -566,19 +613,38 @@
                 <div class="accordion" id="contrib-accordion">
                     <div class="accordion-item">
                         <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Lead Programmer</span>
+                            <span class="accordion-title">
+                                <span class="dropdown-leading-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M4 17l6-6-6-6M12 19h8" />
+                                    </svg>
+                                </span>
+                                Lead Programmer
+                            </span>
                             <span class="accordion-icon">+</span>
                         </button>
                         <div class="accordion-content">
                             <ul>
-                                <li>Core gameplay architecture and systems integration</li>
-                                <li>Performance profiling and optimization passes</li>
-                                <li>Tooling for faster content iteration</li>
+                                <li>Led core gameplay programming and system architecture</li>
+                                <li>Contributed to technical design decisions and long-term system scalability</li>
+                                <li>Assigned and coordinated tasks between 3 programmers</li>
+                                <li>Reviewed and merged code, resolving integration conflicts</li>
                             </ul>
                             <div class="sub-accordion">
                                 <div class="sub-item">
                                     <button class="sub-header" aria-expanded="false">
-                                        <span>Technical Design Diagram</span>
+                                        <span class="sub-label">
+                                            <span class="dropdown-leading-icon" aria-hidden="true">
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <rect x="5" y="5" width="6" height="6" rx="1" />
+                                                    <rect x="13" y="5" width="6" height="6" rx="1" />
+                                                    <rect x="5" y="13" width="6" height="6" rx="1" />
+                                                    <rect x="13" y="13" width="6" height="6" rx="1" />
+                                                    <path d="M11 8h2M8 11v2M16 11v2" />
+                                                </svg>
+                                            </span>
+                                            <span>Technical Design Diagram</span>
+                                        </span>
                                         <span class="sub-icon">+</span>
                                     </button>
                                     <div class="sub-content">
@@ -591,33 +657,111 @@
                                             src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
                                     </div>
                                 </div>
+                                <div class="sub-item">
+                                    <button class="sub-header" aria-expanded="false">
+                                        <span class="sub-label">
+                                            <span class="dropdown-leading-icon" aria-hidden="true">
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path d="M7 8l-3 4 3 4" />
+                                                    <path d="M17 8l3 4-3 4" />
+                                                    <path d="M14 6l-4 12" />
+                                                </svg>
+                                            </span>
+                                            <span>CODE SNIPPET</span>
+                                        </span>
+                                        <span class="sub-icon">+</span>
+                                    </button>
+                                    <div class="sub-content">
+                                        <p style="margin-bottom: 10px;">Gameplay state handler excerpt showing how we
+                                            transition between animal forms with shared input routing.</p>
+                                        <div class="code-snippet">
+                                            <pre><code><span class="comment">// StateManager.cs</span>
+<span class="keyword">public</span> <span class="keyword">void</span> <span class="method">SwitchForm</span>(<span class="type">AnimalForm</span> nextForm)
+{
+    <span class="keyword">if</span> (currentForm == nextForm) <span class="keyword">return</span>;
+
+    currentForm.<span class="method">OnExit</span>();
+    currentForm = forms[nextForm];
+    currentForm.<span class="method">OnEnter</span>();
+
+    abilityBus.<span class="method">RouteTo</span>(currentForm);
+    uiSignals.<span class="method">Dispatch</span>(FormChanged, currentForm.DisplayName);
+}
+</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item">
                         <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Level Design &amp; Implementation</span>
+                            <span class="accordion-title">
+                                <span class="dropdown-leading-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <circle cx="12" cy="8" r="3" />
+                                        <path d="M4 20c0-4 3.5-7 8-7s8 3 8 7" />
+                                        <path d="M12 11v3M10 14h4" />
+                                    </svg>
+                                </span>
+                                Product Owner
+                            </span>
                             <span class="accordion-icon">+</span>
                         </button>
                         <div class="accordion-content">
                             <ul>
-                                <li>Puzzle blockouts to final art pass handoff</li>
-                                <li>Scripting of interactive elements and triggers</li>
+                                <li>Managed <strong>Agile workflow</strong>, defined sprint goals, prioritized backlog,
+                                    and aligned development with product vision</li>
+                                <li>Coordinated cross-disciplinary communication between 3 programmers,
+                                    2 artists, 1 PM, and 2 outsoursed music & sounds designers</li>
+                                <li>Participated in business pitch presentations</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">
+                                <span class="dropdown-leading-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <rect x="3" y="3" width="7" height="7" rx="1" />
+                                        <rect x="14" y="3" width="7" height="7" rx="1" />
+                                        <rect x="3" y="14" width="7" height="7" rx="1" />
+                                        <rect x="14" y="14" width="7" height="7" rx="1" />
+                                    </svg>
+                                </span>
+                                Level Designer &amp; Implementation
+                            </span>
+                            <span class="accordion-icon">+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <ul>
+                                <li>Designed and implemented physics-based puzzle logic and fail states</li>
+                                <li>Developed mouse,cow characters mechanics (movement, actions, puzzle interactions)
+                                </li>
+                                <li>Integrated gameplay systems, 3D assets, UI elements, music & sounds into complete
+                                    playable levels</li>
                                 <li>Playtesting and iteration based on feedback</li>
                             </ul>
                         </div>
                     </div>
                     <div class="accordion-item">
                         <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Production &amp; Release</span>
+                            <span class="accordion-title">
+                                <span class="dropdown-leading-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M12 3l8 8-8 8" />
+                                        <path d="M4 12h16" />
+                                        <circle cx="12" cy="12" r="2" fill="currentColor" />
+                                    </svg>
+                                </span>
+                                Production &amp; Release
+                            </span>
                             <span class="accordion-icon">+</span>
                         </button>
                         <div class="accordion-content">
                             <ul>
                                 <li>Managed <strong>Steam deployment</strong> workflow (store page setup, build uploads,
                                     version control, testing branches)</li>
-                                <li>Release checklists and QA sign‑off</li>
-                                <li>Build automation and versioning</li>
                             </ul>
                         </div>
                     </div>
@@ -822,6 +966,7 @@
                     });
                 });
             });
+
         })();
     </script>
 
