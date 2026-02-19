@@ -255,34 +255,71 @@
 
         .media-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
             margin-top: 40px;
+            align-items: end;
+            perspective: 1000px;
         }
 
         .media-item {
             border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .media-item:hover {
-            transform: translateY(-5px);
+            overflow: visible;
+            box-shadow: none;
+            transition: transform 0.3s ease-out;
+            width: 50%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform-style: preserve-3d;
+            cursor: pointer;
         }
 
         .media-item img {
             width: 100%;
             height: auto;
             display: block;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .badge-container {
+            position: relative;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .badge-shine {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.1) 25%,
+                    rgba(255, 255, 255, 0.3) 50%,
+                    rgba(255, 255, 255, 0.1) 75%,
+                    rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .media-item:hover .badge-shine {
+            opacity: 1;
         }
 
         .media-caption {
-            padding: 15px;
-            background: white;
+            padding: 10px 5px;
+            background: transparent;
             font-size: 0.9rem;
             color: #666;
             text-align: center;
+            white-space: nowrap;
         }
 
         .diagram-wrapper {
@@ -625,10 +662,14 @@
                         </button>
                         <div class="accordion-content">
                             <ul>
-                                <li>Led core gameplay programming and system architecture</li>
-                                <li>Contributed to technical design decisions and long-term system scalability</li>
-                                <li>Assigned and coordinated tasks between 3 programmers</li>
-                                <li>Reviewed and merged code, resolving integration conflicts</li>
+                                <li>Led core <strong>gameplay programming</strong> and <strong>system
+                                        architecture</strong>
+                                </li>
+                                <li>Contributed to <strong>technical design decisions</strong> and long-term system
+                                    <strong>scalability</strong>
+                                </li>
+                                <li>Assigned and coordinated tasks between <strong>3 programmers</strong></li>
+                                <li>Reviewed and merged code, resolving integration <strong>Git conflicts</strong></li>
                             </ul>
                             <div class="sub-accordion">
                                 <div class="sub-item">
@@ -712,12 +753,12 @@
                             <ul>
                                 <li>Managed <strong>Agile workflow</strong>, defined sprint goals, prioritized backlog,
                                     and aligned development with product vision</li>
-                                <li>Coordinated cross-disciplinary communication between 3 programmers,
-                                    2 artists, 1 PM, and 2 outsoursed music & sounds designers</li>
+                                <li>Coordinated cross-disciplinary <strong>communication</strong> between 3 programmers,
+                                    2 artists, 1 PM, and 2 outsourced music & sounds designers</li>
                                 <li>Brainstormed and implemented <strong>gameplay features</strong> and
-                                    <strong>level design</strong>, provide arts direction and refereces
+                                    <strong>level design</strong>, provide arts direction and references
                                 </li>
-                                <li>Participated in business pitch presentations</li>
+                                <li>Participated in <strong>Business Pitch</strong> presentations</li>
                             </ul>
                         </div>
                     </div>
@@ -738,12 +779,27 @@
                         </button>
                         <div class="accordion-content">
                             <ul>
-                                <li>Designed and implemented physics-based puzzle logic and fail states</li>
-                                <li>Developed mouse,cow characters mechanics (movement, actions, puzzle interactions)
+                                <li>Designed and implemented <strong>physics-based puzzle logic</strong> and fail states
+                                    (catapults,
+                                    spinning fans,
+                                    rope destruction, unstable platforms, breaking cubes)</li>
+                                <li>Developed <strong>mouse, cow characters mechanics</strong> (movement, actions:
+                                    jumping, wall-sliding,
+                                    puzzle interactions)
                                 </li>
-                                <li>Integrated gameplay systems, 3D assets, UI elements, music & sounds into complete
+                                <li><strong>Integrated</strong> gameplay systems, 3D assets, UI elements, music & sounds
+                                    into complete
                                     playable levels</li>
-                                <li>Playtesting and iteration based on feedback</li>
+                                <li>Integrated Unity <strong>Input System</strong> (keyboard & controller), structured
+                                    action
+                                    mapping and
+                                    input flow</li>
+                                <li>Implemented <strong>animation logic</strong> and resolved root motion conflicts</li>
+                                <li>Implemented <strong>Cinemachine camera system</strong> like a real movie director
+                                </li>
+                                <li>Tuned movement feel, camera constraints, and velocity to <strong>improve player
+                                        experience</strong>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -772,19 +828,31 @@
 
 
 
-                <h2 class="section-heading">Screenshots</h2>
+                <h2 class="section-heading">My Badges</h2>
                 <div class="media-grid">
                     <div class="media-item">
-                        <img src="pictures/screenshot1.jpg" alt="Gameplay Screenshot 1">
-                        <div class="media-caption">Main gameplay area with puzzle elements</div>
+                        <div class="badge-container">
+                            <img src="pictures/badge1.png" alt="Badge 1">
+                            <div class="badge-shine"></div>
+                        </div>
                     </div>
                     <div class="media-item">
-                        <img src="pictures/screenshot2.jpg" alt="Gameplay Screenshot 2">
-                        <div class="media-caption">Platforming section with environmental hazards</div>
+                        <div class="badge-container">
+                            <img src="pictures/badge2.png" alt="Badge 2">
+                            <div class="badge-shine"></div>
+                        </div>
                     </div>
                     <div class="media-item">
-                        <img src="pictures/screenshot3.jpg" alt="Gameplay Screenshot 3">
-                        <div class="media-caption">Puzzle mechanic demonstration</div>
+                        <div class="badge-container">
+                            <img src="pictures/badge3.png" alt="Badge 3">
+                            <div class="badge-shine"></div>
+                        </div>
+                    </div>
+                    <div class="media-item">
+                        <div class="badge-container">
+                            <img src="pictures/badge4.png" alt="Badge 4">
+                            <div class="badge-shine"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -970,6 +1038,35 @@
                 });
             });
 
+        })();
+
+        // Badge 3D rotation interaction
+        (function () {
+            const badges = document.querySelectorAll('.media-item');
+
+            badges.forEach(badge => {
+                badge.addEventListener('mousemove', (e) => {
+                    const rect = badge.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const width = rect.width;
+
+                    // Calculate rotation based on cursor position
+                    // x position ranges from 0 (left) to width (right)
+                    // Map to rotation from +20deg (left) to -20deg (right)
+                    const normalizedX = (x / width) - 0.5; // Range: -0.5 to 0.5
+                    const rotateY = -normalizedX * 40; // Range: +20 to -20 degrees
+
+                    // Apply transform with smooth transition
+                    badge.style.transform = `rotateY(${rotateY}deg)`;
+                    badge.style.transition = 'transform 0.1s ease-out';
+                });
+
+                badge.addEventListener('mouseleave', () => {
+                    // Reset to neutral rotation with smooth animation
+                    badge.style.transform = 'rotateY(0deg)';
+                    badge.style.transition = 'transform 0.5s ease-out';
+                });
+            });
         })();
     </script>
 
