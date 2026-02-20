@@ -542,6 +542,8 @@
             padding: 20px;
             border-radius: 8px;
             overflow-x: auto;
+            overflow-y: auto;
+            max-height: 500px;
             margin-bottom: 20px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
@@ -577,6 +579,93 @@
             color: #666;
             margin-bottom: 30px;
             font-style: italic;
+        }
+
+        .gist-container {
+            margin: 20px 0;
+            max-height: 500px;
+            overflow-y: auto;
+            border-radius: 8px;
+        }
+
+        .gist-container .gist {
+            margin: 0 !important;
+        }
+
+        .gist-container .gist-file {
+            border: none !important;
+        }
+
+        /* Visual Studio Dark Theme for GitHub Gist */
+        .gist-container .gist-data {
+            background-color: #1e1e1e !important;
+        }
+
+        .gist-container .blob-code,
+        .gist-container .blob-code-inner {
+            background-color: #1e1e1e !important;
+            color: #d4d4d4 !important;
+        }
+
+        .gist-container .blob-num {
+            background-color: #1e1e1e !important;
+            color: #858585 !important;
+        }
+
+        /* VS Dark syntax highlighting */
+        .gist-container .pl-k {
+            color: #569cd6 !important;
+            /* keywords: using, public, private, etc */
+        }
+
+        .gist-container .pl-en {
+            color: #dcdcaa !important;
+            /* method names */
+        }
+
+        .gist-container .pl-s1 {
+            color: #9cdcfe !important;
+            /* variables and identifiers */
+        }
+
+        .gist-container .pl-c1 {
+            color: #b5cea8 !important;
+            /* constants and numbers */
+        }
+
+        .gist-container .pl-s {
+            color: #ce9178 !important;
+            /* strings */
+        }
+
+        .gist-container .pl-c {
+            color: #6a9955 !important;
+            /* comments */
+            font-style: italic !important;
+        }
+
+        .gist-container .pl-smi {
+            color: #4ec9b0 !important;
+            /* types and classes */
+        }
+
+        .gist-container .pl-pds {
+            color: #ce9178 !important;
+            /* string delimiters */
+        }
+
+        .gist-container .pl-ent {
+            color: #4ec9b0 !important;
+            /* entity/type names */
+        }
+
+        .gist-container .gist-meta {
+            background-color: #252526 !important;
+            color: #cccccc !important;
+        }
+
+        .gist-container .gist-meta a {
+            color: #569cd6 !important;
         }
 
         footer {
@@ -749,22 +838,24 @@
                                         <span class="sub-icon">+</span>
                                     </button>
                                     <div class="sub-content">
-                                        <p style="margin-bottom: 10px;">Gameplay state handler excerpt showing how we
-                                            transition between animal forms with shared input routing.</p>
-                                        <div class="code-snippet">
-                                            <pre><code><span class="comment">// StateManager.cs</span>
-<span class="keyword">public</span> <span class="keyword">void</span> <span class="method">SwitchForm</span>(<span class="type">AnimalForm</span> nextForm)
-{
-    <span class="keyword">if</span> (currentForm == nextForm) <span class="keyword">return</span>;
-
-    currentForm.<span class="method">OnExit</span>();
-    currentForm = forms[nextForm];
-    currentForm.<span class="method">OnEnter</span>();
-
-    abilityBus.<span class="method">RouteTo</span>(currentForm);
-    uiSignals.<span class="method">Dispatch</span>(FormChanged, currentForm.DisplayName);
-}
-</code></pre>
+                                        <ul style="margin-bottom: 20px; line-height: 1.8;">
+                                            <li><strong>Advanced Cinematic System:</strong> Demonstrates sophisticated
+                                                cutscene orchestration with multi-phase camera transitions (bag fall →
+                                                spider flight)</li>
+                                            <li><strong>Spline-Based Animation:</strong> Shows mastery of Unity Splines
+                                                for smooth, controlled character movement along predefined paths</li>
+                                            <li><strong>Time Manipulation:</strong> Implements dynamic slow-motion
+                                                effects with smooth blending</li>
+                                            <li><strong>Cinemachine 3.x Integration:</strong> Professional camera
+                                                management with priority systems and dolly synchronization</li>
+                                            <li><strong>State Management:</strong> Complex coroutine-based sequencing
+                                                with proper cleanup and state restoration</li>
+                                            <li><strong>Polish Features:</strong> Audio integration, platform
+                                                validation, automatic character switching on landing</li>
+                                        </ul>
+                                        <div class="gist-container">
+                                            <script
+                                                src="https://gist.github.com/AmberWang92/120b324db4cbee71f67da7648089cbfc.js"></script>
                                         </div>
                                     </div>
                                 </div>
@@ -786,17 +877,23 @@
                             <span class="accordion-icon">+</span>
                         </button>
                         <div class="accordion-content">
-                            <ul>
-                                <li>Managed <strong>Agile workflow</strong>, defined sprint goals, prioritized backlog,
-                                    and aligned development with product vision</li>
-                                <li>Coordinated cross-disciplinary <strong>communication</strong> between 3 programmers,
-                                    2 artists, 1 PM, and 2 outsourced music & sounds designers</li>
-                                <li>Brainstormed and co-designed <strong>whole gameplay</strong> and
-                                    <strong>level design</strong>, provide <strong>arts direction and
-                                        references</strong>
-                                </li>
-                                <li>Participated in <strong>Business Pitch</strong> presentations</li>
-                            </ul>
+                            <div style="display: flex; gap: 30px; align-items: flex-start; flex-wrap: wrap;">
+                                <ul style="flex: 1 1 400px;">
+                                    <li>Managed <strong>Agile workflow</strong>, defined sprint goals, prioritized
+                                        backlog,
+                                        and aligned development with product vision</li>
+                                    <li>Coordinated cross-disciplinary <strong>communication</strong> between 3
+                                        programmers,
+                                        2 artists, 1 PM, and 2 outsourced music & sounds designers</li>
+                                    <li>Brainstormed and co-designed <strong>whole gameplay</strong> and
+                                        <strong>level design</strong>, provide <strong>arts direction and
+                                            references</strong>
+                                    </li>
+                                    <li>Participated in <strong>Business Pitch</strong> presentations</li>
+                                </ul>
+                                <img src="pictures/Presentation.JPG" alt="Business Pitch Presentation"
+                                    style="flex: 1 1 150px; max-width: 200px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); object-fit: cover;">
+                            </div>
                         </div>
                     </div>
                     <div class="accordion-item">
