@@ -238,6 +238,43 @@
             padding: 60px 0;
         }
 
+        .description-layout {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .description-layout img {
+            flex: 1 1 150px;
+            max-width: 200px;
+            border-radius: 18px;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .description-text {
+            flex: 1 1 360px;
+        }
+
+        .gif-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .gif-row img,
+        .gif-row video {
+            flex: 1 1 200px;
+            max-width: 280px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+
         .section-heading {
             font-size: 2rem;
             color: var(--primary-color);
@@ -626,24 +663,23 @@
         <section class="description-section">
             <div class="container">
                 <h2 class="section-heading">About the Project</h2>
-                <div class="description-text">
-                    <p>
-                        Until the Fields: Farmageddon is a <strong>3D single-player puzzle platformer</strong> adventure
-                        where
-                        you swap
-                        between 3 animals:
-                        mouse, spider and cow — each with their own personality and tricks — Our heroes must
-                        cooperate
-                        to solve puzzles and escape the storm-wrecked barn!
-                    </p>
-                    <br>
-                    <p>
-                        The game is a student project developed by a team of <strong>6 women</strong> over <strong>3.5
-                            months</strong>. I spend more than <strong>500 hours</strong> on this project.
-
-                    </p>
-                    <br>
-
+                <div class="description-layout">
+                    <img src="pictures/BestGame.jpeg" alt="Best Game award photo">
+                    <div class="description-text">
+                        <p>
+                            Until the Fields: Farmageddon is a <strong>3D single-player puzzle platformer</strong>
+                            adventure where
+                            you swap between 3 animals: mouse, spider and cow — each with their own personality and
+                            tricks — Our heroes must cooperate to solve puzzles and escape the storm-wrecked barn!
+                        </p>
+                        <br>
+                        <p>
+                            The game is a student project developed by a team of <strong>6 women</strong> over
+                            <strong>3.5 months</strong>. I spend more than <strong>500 hours</strong> on this project.
+                            Won the <strong>Best Game Award</strong> at the Expa X-Max JKL event.
+                        </p>
+                        <br>
+                    </div>
                 </div>
 
                 <h2 class="section-heading">My Contributions</h2>
@@ -755,8 +791,9 @@
                                     and aligned development with product vision</li>
                                 <li>Coordinated cross-disciplinary <strong>communication</strong> between 3 programmers,
                                     2 artists, 1 PM, and 2 outsourced music & sounds designers</li>
-                                <li>Brainstormed and implemented <strong>gameplay features</strong> and
-                                    <strong>level design</strong>, provide arts direction and references
+                                <li>Brainstormed and co-designed <strong>whole gameplay</strong> and
+                                    <strong>level design</strong>, provide <strong>arts direction and
+                                        references</strong>
                                 </li>
                                 <li>Participated in <strong>Business Pitch</strong> presentations</li>
                             </ul>
@@ -782,7 +819,16 @@
                                 <li>Designed and implemented <strong>physics-based puzzle logic</strong> and fail states
                                     (catapults,
                                     spinning fans,
-                                    rope destruction, unstable platforms, breaking cubes)</li>
+                                    rope destruction, unstable platforms, breaking cubes)
+                                    <div class="gif-row">
+                                        <video src="pictures/catapult.mp4" autoplay loop muted playsinline
+                                            aria-label="Catapult puzzle demo"></video>
+                                        <video src="pictures/Spinning_Fan.mp4" autoplay loop muted playsinline
+                                            aria-label="Spinning fan obstacle"></video>
+                                        <video src="pictures/Moo_vement.mp4" autoplay loop muted playsinline
+                                            aria-label="Rope destruction challenge"></video>
+                                    </div>
+                                </li>
                                 <li>Developed <strong>mouse, cow characters mechanics</strong> (movement, actions:
                                     jumping, wall-sliding,
                                     puzzle interactions)

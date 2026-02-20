@@ -259,6 +259,86 @@
             padding: 20px;
         }
 
+        /* --- Skills Section --- */
+        .skills-section {
+            max-width: 900px;
+            margin: 80px auto;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .skills-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .skills-row {
+            display: grid;
+            gap: 25px;
+        }
+
+        .skills-row.primary {
+            grid-template-columns: repeat(4, minmax(160px, 1fr));
+        }
+
+        .skills-row.secondary {
+            grid-template-columns: repeat(4, minmax(160px, 1fr));
+        }
+
+        .skills-row.languages {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+
+        .skills-row.languages .badges+.badges {
+            margin-top: 10px;
+        }
+
+        .skill-category {
+            margin-bottom: 30px;
+        }
+
+        .skill-category h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #555;
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: #f3f3f3;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .badge:hover {
+            background: #2563eb;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .skills-row {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+
         .project-info h3 {
             margin-bottom: 10px;
         }
@@ -334,6 +414,96 @@
                 <p>Hi, I’m Xinyue Wang, Game Developer. I’m focusing on creating immersive and engaging gaming
                     experiences. This portfolio showcases my projects, highlighting my love for storytelling, innovative
                     design, and gameplay. Let’s explore these creative worlds together!...</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills-section">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="skills-row primary">
+                <div class="skill-category">
+                    <h3>Game Engines</h3>
+                    <div class="badges">
+                        <span class="badge">Unity</span>
+                        <span class="badge">Unreal Engine</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Programming</h3>
+                    <div class="badges">
+                        <span class="badge">C#</span>
+                        <span class="badge">C++</span>
+                        <span class="badge">Python</span>
+                        <span class="badge">JavaScript</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Web Design</h3>
+                    <div class="badges">
+                        <span class="badge">HTML</span>
+                        <span class="badge">CSS</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>3D Modeling</h3>
+                    <div class="badges">
+                        <span class="badge">Maya</span>
+                        <span class="badge">Blender</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-row secondary">
+                <div class="skill-category">
+                    <h3>Video Editing</h3>
+                    <div class="badges">
+                        <span class="badge">Final Cut Pro X</span>
+                        <span class="badge">Premiere</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>VFX</h3>
+                    <div class="badges">
+                        <span class="badge">After Effects</span>
+                        <span class="badge">Unreal Engine</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Graphic Design</h3>
+                    <div class="badges">
+                        <span class="badge">Photoshop</span>
+                        <span class="badge">Illustrator</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Digital Marketing</h3>
+                    <div class="badges">
+                        <span class="badge">SEO</span>
+                        <span class="badge">SEM</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-row languages">
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="badges">
+                        <span class="badge">Chinese (Native)</span>
+                        <span class="badge">English (B2)</span>
+                    </div>
+                    <div class="badges">
+                        <span class="badge">Spanish (B1)</span>
+                        <span class="badge">Finnish (A2)</span>
+                        <span class="badge">German (A1)</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
