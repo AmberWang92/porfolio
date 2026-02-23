@@ -165,6 +165,12 @@
             margin-top: 30px;
         }
 
+        .game-links iframe {
+            width: 646px;
+            max-width: 100%;
+            height: 190px;
+        }
+
         .game-link-btn {
             display: inline-flex;
             align-items: center;
@@ -304,7 +310,6 @@
             overflow: visible;
             box-shadow: none;
             transition: transform 0.3s ease-out;
-            width: 50%;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -314,8 +319,9 @@
         }
 
         .media-item img {
-            width: 100%;
+            width: 70%;
             height: auto;
+            max-width: 100%;
             display: block;
             border-radius: 10px;
             position: relative;
@@ -689,8 +695,18 @@
                 align-items: center;
             }
 
+            .game-links iframe {
+                width: 100%;
+                max-width: 100%;
+                height: 190px;
+            }
+
             .media-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .media-item img {
+                width: 49%;
             }
         }
     </style>
@@ -744,7 +760,7 @@
 
                 <div class="game-links">
                     <iframe src="https://store.steampowered.com/widget/4129640/" frameborder="0" width="646"
-                        height="190"></iframe>
+                        height="190" scrolling="no"></iframe>
                 </div>
             </div>
         </section>
@@ -918,11 +934,11 @@
                                     spinning fans,
                                     rope destruction, unstable platforms, breaking cubes)
                                     <div class="gif-row">
-                                        <video src="pictures/catapult.mp4" autoplay loop muted playsinline
+                                        <video src="files/catapult.mp4" autoplay loop muted playsinline
                                             aria-label="Catapult puzzle demo"></video>
-                                        <video src="pictures/Spinning_Fan.mp4" autoplay loop muted playsinline
+                                        <video src="files/Spinning_Fan.mp4" autoplay loop muted playsinline
                                             aria-label="Spinning fan obstacle"></video>
-                                        <video src="pictures/Moo_vement.mp4" autoplay loop muted playsinline
+                                        <video src="files/Moo_vement.mp4" autoplay loop muted playsinline
                                             aria-label="Rope destruction challenge"></video>
                                     </div>
                                 </li>
