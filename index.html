@@ -18,8 +18,56 @@
             /* 背景色 */
             --light-bg: #f9f9f9;
             /* 浅灰背景，用于区分板块 */
+            --header-bg: #ffffff;
+            --nav-pill-bg: #f5f5f7;
+            --nav-link-color: #1d1d1f;
+            --nav-link-hover-color: #000000;
+            --nav-indicator-bg: #1d1d1f;
+            --hero-gradient-start: #f5f7fa;
+            --hero-gradient-end: #c3cfe2;
+            --muted-text: #666666;
+            --profile-placeholder-bg: #dddddd;
+            --profile-placeholder-text: #888888;
+            --card-bg: #ffffff;
+            --project-img-bg: #eeeeee;
+            --project-img-text: #aaaaaa;
+            --badge-bg: #f3f3f3;
+            --badge-hover-bg: #2563eb;
+            --btn-hover-bg: #2980b9;
+            --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.05);
+            --shadow-card: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --footer-bg: #2c3e50;
             --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             --spacing-unit: 20px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-color: #d6e0ea;
+                --accent-color: #5aa7e6;
+                --text-color: #e4e7eb;
+                --bg-color: #12161b;
+                --light-bg: #1b2128;
+                --header-bg: #151b22;
+                --nav-pill-bg: #252d37;
+                --nav-link-color: #d4d9df;
+                --nav-link-hover-color: #ffffff;
+                --nav-indicator-bg: #3a4655;
+                --hero-gradient-start: #161b22;
+                --hero-gradient-end: #243344;
+                --muted-text: #b8c0cb;
+                --profile-placeholder-bg: #2a313a;
+                --profile-placeholder-text: #aab3be;
+                --card-bg: #1b222b;
+                --project-img-bg: #2a313a;
+                --project-img-text: #9aa5b1;
+                --badge-bg: #2a313a;
+                --badge-hover-bg: #3f82ff;
+                --btn-hover-bg: #3f82ff;
+                --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.35);
+                --shadow-card: 0 5px 15px rgba(0, 0, 0, 0.35);
+                --footer-bg: #0d1117;
+            }
         }
 
         * {
@@ -80,8 +128,8 @@
 
         /* --- 3. 导航栏 (Navigation) --- */
         header {
-            background: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            background: var(--header-bg);
+            box-shadow: var(--shadow-soft);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -103,7 +151,7 @@
         .nav-links {
             display: flex;
             gap: 0;
-            background: #f5f5f7;
+            background: var(--nav-pill-bg);
             border-radius: 50px;
             padding: 4px;
             position: relative;
@@ -115,7 +163,7 @@
             border-radius: 50px;
             transition: color 0.25s ease;
             font-size: 0.95rem;
-            color: #1d1d1f;
+            color: var(--nav-link-color);
             position: relative;
             z-index: 1;
             display: flex;
@@ -125,7 +173,7 @@
         }
 
         .nav-links a:hover {
-            color: #000;
+            color: var(--nav-link-hover-color);
         }
 
         .nav-links a.active {
@@ -139,7 +187,7 @@
             left: 0;
             width: 0;
             border-radius: 999px;
-            background: #1d1d1f;
+            background: var(--nav-indicator-bg);
             transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
                 width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
                 opacity 0.2s ease;
@@ -155,7 +203,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, var(--hero-gradient-start) 0%, var(--hero-gradient-end) 100%);
         }
 
         .hero-content h1 {
@@ -166,7 +214,7 @@
 
         .hero-content p {
             font-size: 1.5rem;
-            color: #666;
+            color: var(--muted-text);
             margin-bottom: 30px;
         }
 
@@ -180,7 +228,7 @@
         }
 
         .btn:hover {
-            background: #2980b9;
+            background: var(--btn-hover-bg);
         }
 
         /* --- 5. 关于我 (About) --- */
@@ -194,14 +242,14 @@
         .profile-img {
             width: 100%;
             height: 300px;
-            background-color: #ddd;
+            background-color: var(--profile-placeholder-bg);
             /* 占位符背景 */
             border-radius: 10px;
             object-fit: cover;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #888;
+            color: var(--profile-placeholder-text);
         }
 
         /* --- 6. 简历/经历 (Resume/Timeline) --- */
@@ -222,7 +270,7 @@
 
         .resume-item .date {
             font-size: 0.9rem;
-            color: #888;
+            color: var(--muted-text);
             margin-bottom: 10px;
             display: block;
         }
@@ -235,10 +283,10 @@
         }
 
         .project-card {
-            background: #fff;
+            background: var(--card-bg);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-card);
             transition: transform 0.3s;
         }
 
@@ -248,11 +296,11 @@
 
         .project-img {
             height: 200px;
-            background-color: #eee;
+            background-color: var(--project-img-bg);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #aaa;
+            color: var(--project-img-text);
         }
 
         .project-info {
@@ -308,7 +356,7 @@
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 12px;
-            color: #555;
+            color: var(--muted-text);
         }
 
         .badges {
@@ -320,7 +368,7 @@
         .badge {
             padding: 8px 16px;
             border-radius: 20px;
-            background: #f3f3f3;
+            background: var(--badge-bg);
             font-size: 0.9rem;
             font-weight: 500;
             transition: all 0.3s ease;
@@ -328,7 +376,7 @@
         }
 
         .badge:hover {
-            background: #2563eb;
+            background: var(--badge-hover-bg);
             color: white;
             transform: translateY(-2px);
         }
@@ -409,7 +457,7 @@
 
         /* --- 8. 页脚 (Footer) --- */
         footer {
-            background: var(--primary-color);
+            background: var(--footer-bg);
             color: #fff;
             text-align: center;
             padding: 40px 0;
@@ -532,7 +580,6 @@
                         <span class="badge">Unreal Engine</span>
                     </div>
                 </div>
-
                 <div class="skill-category">
                     <h3>Graphic Design</h3>
                     <div class="badges">
@@ -574,7 +621,7 @@
             <!-- Project 1 -->
             <article class="project-card">
                 <div class="project-img">
-                    <img src="pictures/project_Farmageddon.png" alt="Farmageddon"
+                    <img src="pictures/project_Farmageddon.png" alt="Poster_Farmageddon"
                         style="width:100%; height:100%; object-fit:cover;">
                 </div>
                 <div class="project-info">
@@ -598,21 +645,26 @@
             <!-- Project 2 -->
             <article class="project-card">
                 <div class="project-img">
-                    <img src="https://via.placeholder.com/600x400?text=Project+2" alt="Project 2"
+                    <img src="pictures/project_GhostGym.png" alt="Poster_GhostGym"
                         style="width:100%; height:100%; object-fit:cover;">
                 </div>
                 <div class="project-info">
-                    <h3>A MR Game: Ghost Gym</h3>
+                    <h3>MR Game: Ghost Gym</h3>
                     <div class="tags-container" style="display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0;">
+                        <span class="tag"
+                            style="background: var(--accent-color); color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 500;">Mixed
+                            Reality (MR)</span>
+                        <span class="tag"
+                            style="background: var(--accent-color); color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 500;">Meta
+                            Oculus</span>
                         <span class="tag"
                             style="background: var(--accent-color); color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 500;">Unity</span>
                         <span class="tag"
                             style="background: var(--accent-color); color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 500;">C#</span>
-                        <span class="tag"
-                            style="background: var(--accent-color); color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 500;">Meta
-                            Oculus MR Game</span>
+
                     </div>
-                    <p>This is a solo project, player controlls handles can punch and shot the ghost boss.</p>
+                    <p>This is a solo Mixed Reality (MR) project, player controlls handles can punch and shot the ghost
+                        boss.</p>
                     <br>
                     <a href="mr_game.html">View Details &rarr;</a>
                 </div>

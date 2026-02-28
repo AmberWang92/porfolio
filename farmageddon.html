@@ -4,712 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Name - Xinyue Wang</title>
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --text-color: #333333;
-            --bg-color: #ffffff;
-            --light-bg: #f9f9f9;
-            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            --spacing-unit: 20px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-main);
-            color: var(--text-color);
-            line-height: 1.6;
-            background-color: var(--bg-color);
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: 0.3s;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 var(--spacing-unit);
-        }
-
-        header {
-            background: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 0;
-            background: #f5f5f7;
-            border-radius: 50px;
-            padding: 4px;
-            position: relative;
-            align-items: center;
-            list-style: none;
-        }
-
-        .nav-links a {
-            padding: 10px 24px;
-            border-radius: 50px;
-            transition: color 0.25s ease;
-            font-size: 0.95rem;
-            color: #1d1d1f;
-            position: relative;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .nav-links a:hover {
-            color: #000;
-        }
-
-        .nav-links a.active {
-            color: #fff;
-        }
-
-        .nav-indicator {
-            position: absolute;
-            top: 4px;
-            bottom: 4px;
-            left: 0;
-            width: 0;
-            border-radius: 999px;
-            background: #1d1d1f;
-            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.2s ease;
-            opacity: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .back-link {
-            color: var(--accent-color);
-            font-weight: bold;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            margin: 30px 0;
-        }
-
-        .back-link:hover {
-            opacity: 0.8;
-        }
-
-        .project-header {
-            padding: 60px 0 40px;
-            text-align: center;
-        }
-
-        .project-title {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .project-subtitle {
-            font-size: 1.3rem;
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        .tags-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-
-        .tag {
-            background: var(--accent-color);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .game-links {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 30px;
-        }
-
-        .game-links iframe {
-            width: 646px;
-            max-width: 100%;
-            height: 190px;
-        }
-
-        .game-link-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 30px;
-            background: var(--primary-color);
-            color: white;
-            border-radius: 15px;
-            font-weight: bold;
-            transition: transform 0.3s, background 0.3s, border 0.3s;
-            border: 3px solid transparent;
-        }
-
-        .game-link-btn:hover {
-            background: #1a252f;
-            transform: translateY(-2px);
-        }
-
-        .game-link-btn.steam {
-            background: transparent;
-            border-radius: 20px;
-            color: #000;
-        }
-
-        .game-link-btn.steam:hover {
-            border: 3px solid #66c0f4;
-            background: transparent;
-            transform: translateY(-2px);
-        }
-
-        .game-link-btn img {
-            transition: transform 0.3s ease;
-            object-fit: contain;
-            width: 50px;
-            height: 50px;
-        }
-
-        .game-link-btn:hover img {
-            transform: scale(1.2);
-        }
-
-        .game-link-btn.itch {
-            background: #fa5c5c;
-        }
-
-        .video-section {
-            padding: 40px 0;
-            background: var(--light-bg);
-        }
-
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            max-width: 100%;
-            background: #000;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .description-section {
-            padding: 60px 0;
-        }
-
-        .description-layout {
-            display: flex;
-            gap: 30px;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            margin: 40px 0;
-        }
-
-        .description-layout img {
-            flex: 1 1 150px;
-            max-width: 200px;
-            border-radius: 18px;
-            object-fit: cover;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .description-text {
-            flex: 1 1 360px;
-        }
-
-        .gif-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 15px;
-        }
-
-        .gif-row img,
-        .gif-row video {
-            flex: 1 1 200px;
-            max-width: 280px;
-            border-radius: 12px;
-            object-fit: cover;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-
-
-        .section-heading {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid var(--accent-color);
-        }
-
-        .description-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #555;
-            margin-bottom: 40px;
-        }
-
-        .media-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-top: 40px;
-            align-items: end;
-            perspective: 1000px;
-        }
-
-        .media-item {
-            border-radius: 10px;
-            overflow: visible;
-            box-shadow: none;
-            transition: transform 0.3s ease-out;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transform-style: preserve-3d;
-            cursor: pointer;
-        }
-
-        .media-item img {
-            width: 70%;
-            height: auto;
-            max-width: 100%;
-            display: block;
-            border-radius: 10px;
-            position: relative;
-        }
-
-        .badge-container {
-            position: relative;
-            width: 100%;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .badge-shine {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg,
-                    rgba(255, 255, 255, 0) 0%,
-                    rgba(255, 255, 255, 0.1) 25%,
-                    rgba(255, 255, 255, 0.3) 50%,
-                    rgba(255, 255, 255, 0.1) 75%,
-                    rgba(255, 255, 255, 0) 100%);
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            border-radius: 10px;
-        }
-
-        .media-item:hover .badge-shine {
-            opacity: 1;
-        }
-
-        .media-caption {
-            padding: 10px 5px;
-            background: transparent;
-            font-size: 0.9rem;
-            color: #666;
-            text-align: center;
-            white-space: nowrap;
-        }
-
-        .diagram-wrapper {
-            margin: 50px 0;
-        }
-
-        .diagram-wrapper iframe {
-            width: 100%;
-            min-height: 480px;
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Accordion (My Contributions) */
-        .accordion {
-            margin: 20px 0 40px;
-            display: grid;
-            gap: 12px;
-        }
-
-        .accordion-item {
-            background: #f5f5f7;
-            border: 1px solid #e5e5ea;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .accordion-header {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 18px;
-            cursor: pointer;
-            color: #1d1d1f;
-            font-weight: 600;
-            font-size: 1.15rem;
-            background: transparent;
-            border: none;
-            text-align: left;
-        }
-
-        .accordion-header:hover {
-            background: #eef6ff;
-        }
-
-        .accordion-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .dropdown-leading-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 1.3em;
-            height: 1.3em;
-            color: #1d46a4;
-            flex-shrink: 0;
-        }
-
-        .dropdown-leading-icon svg {
-            width: 1.3em;
-            height: 1.3em;
-            display: block;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-        }
-
-        .accordion-icon {
-            font-size: 20px;
-            line-height: 1;
-            transition: transform 0.25s ease;
-        }
-
-        .accordion-content {
-            height: 0;
-            overflow: hidden;
-            transition: height 0.35s ease;
-            background: #fff;
-            padding: 0 18px;
-            /* keep horizontal padding static to avoid jump */
-        }
-
-        /* Optional: Avoid unexpected top margin jump of first child */
-        .accordion-content> :first-child {
-            margin-top: 16px;
-        }
-
-        .accordion-content> :last-child {
-            margin-bottom: 16px;
-        }
-
-        /* Make list items slightly smaller than headers for hierarchy */
-        .accordion-content li {
-            font-size: 0.98rem;
-        }
-
-        /* Increase left indent for lists inside accordion content */
-        .accordion-content ul {
-            padding-left: 28px;
-        }
-
-        /* open state no longer relies on max-height/padding transitions; handled by JS */
-
-        .accordion-item.open .accordion-icon {
-            transform: rotate(45deg);
-        }
-
-        /* Sub-accordion inside a panel */
-        .sub-accordion {
-            margin-top: 12px;
-            display: grid;
-            gap: 8px;
-        }
-
-        .sub-item {
-            background: #fff;
-            border: 1px solid #e5e5ea;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .sub-header {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 14px;
-            cursor: pointer;
-            color: #1d1d1f;
-            font-weight: 600;
-            font-size: 1.0rem;
-            background: #f5f5f7;
-            border: none;
-            text-align: left;
-        }
-
-        .sub-header:hover {
-            background: #eef6ff;
-        }
-
-        .sub-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .sub-icon {
-            transition: transform 0.25s ease;
-        }
-
-        .sub-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.35s ease, padding 0.25s ease;
-            background: #fff;
-            padding: 0 14px;
-        }
-
-        .sub-item.open .sub-content {
-            max-height: 600px;
-            padding: 12px 14px 14px;
-        }
-
-        .sub-item.open .sub-icon {
-            transform: rotate(45deg);
-        }
-
-        .code-section {
-            padding: 60px 0;
-            background: var(--light-bg);
-        }
-
-        .code-snippet {
-            background: #1e1e1e;
-            color: #d4d4d4;
-            padding: 20px;
-            border-radius: 8px;
-            overflow-x: auto;
-            overflow-y: auto;
-            max-height: 500px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .code-snippet pre {
-            margin: 0;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        /* Visual Studio C# syntax highlighting */
-        .code-snippet .keyword {
-            color: #569cd6;
-            font-weight: normal;
-        }
-
-        .code-snippet .type {
-            color: #4ec9b0;
-        }
-
-        .code-snippet .method {
-            color: #dcdcaa;
-        }
-
-        .code-snippet .comment {
-            color: #6a9955;
-            font-style: italic;
-        }
-
-        .code-caption {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 30px;
-            font-style: italic;
-        }
-
-        .gist-container {
-            margin: 20px 0;
-            max-height: 500px;
-            overflow-y: auto;
-            border-radius: 8px;
-        }
-
-        .gist-container .gist {
-            margin: 0 !important;
-        }
-
-        .gist-container .gist-file {
-            border: none !important;
-        }
-
-        /* Visual Studio Dark Theme for GitHub Gist */
-        .gist-container .gist-data {
-            background-color: #1e1e1e !important;
-        }
-
-        .gist-container .blob-code,
-        .gist-container .blob-code-inner {
-            background-color: #1e1e1e !important;
-            color: #d4d4d4 !important;
-        }
-
-        .gist-container .blob-num {
-            background-color: #1e1e1e !important;
-            color: #858585 !important;
-        }
-
-        /* VS Dark syntax highlighting */
-        .gist-container .pl-k {
-            color: #569cd6 !important;
-            /* keywords: using, public, private, etc */
-        }
-
-        .gist-container .pl-en {
-            color: #dcdcaa !important;
-            /* method names */
-        }
-
-        .gist-container .pl-s1 {
-            color: #9cdcfe !important;
-            /* variables and identifiers */
-        }
-
-        .gist-container .pl-c1 {
-            color: #b5cea8 !important;
-            /* constants and numbers */
-        }
-
-        .gist-container .pl-s {
-            color: #ce9178 !important;
-            /* strings */
-        }
-
-        .gist-container .pl-c {
-            color: #6a9955 !important;
-            /* comments */
-            font-style: italic !important;
-        }
-
-        .gist-container .pl-smi {
-            color: #4ec9b0 !important;
-            /* types and classes */
-        }
-
-        .gist-container .pl-pds {
-            color: #ce9178 !important;
-            /* string delimiters */
-        }
-
-        .gist-container .pl-ent {
-            color: #4ec9b0 !important;
-            /* entity/type names */
-        }
-
-        .gist-container .gist-meta {
-            background-color: #252526 !important;
-            color: #cccccc !important;
-        }
-
-        .gist-container .gist-meta a {
-            color: #569cd6 !important;
-        }
-
-        footer {
-            background: var(--primary-color);
-            color: #fff;
-            text-align: center;
-            padding: 40px 0;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .project-title {
-                font-size: 2rem;
-            }
-
-            .game-links {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .game-links iframe {
-                width: 100%;
-                max-width: 100%;
-                height: 190px;
-            }
-
-            .media-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .media-item img {
-                width: 49%;
-            }
-        }
-    </style>
+    <title>Until the Fields: Farmageddon - Xinyue Wang</title>
+    <link rel="stylesheet" href="css/project-styles.css">
 </head>
 
 <body>
@@ -830,13 +126,21 @@
                                         <span class="sub-icon">+</span>
                                     </button>
                                     <div class="sub-content">
-
-                                        <!-- draw.io diagram -->
-                                        <div class="mxgraph" style="max-width:100%;border:1px solid transparent;"
-                                            data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;dark-mode&quot;:&quot;auto&quot;,&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; agent=\&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36\&quot; version=\&quot;29.4.0\&quot;&gt;\n  &lt;diagram name=\&quot;第 1 页\&quot; id=\&quot;sPX0HjRt7P7a30QzXF_5\&quot;&gt;\n    &lt;mxGraphModel dx=\&quot;3980\&quot; dy=\&quot;3339\&quot; grid=\&quot;1\&quot; gridSize=\&quot;10\&quot; guides=\&quot;1\&quot; tooltips=\&quot;1\&quot; connect=\&quot;1\&quot; arrows=\&quot;1\&quot; fold=\&quot;1\&quot; page=\&quot;1\&quot; pageScale=\&quot;1\&quot; pageWidth=\&quot;827\&quot; pageHeight=\&quot;1169\&quot; math=\&quot;0\&quot; shadow=\&quot;0\&quot;&gt;\n      &lt;root&gt;\n        &lt;mxCell id=\&quot;0\&quot; /&gt;\n        &lt;mxCell id=\&quot;1\&quot; parent=\&quot;0\&quot; /&gt;\n        &lt;mxCell id=\&quot;VIrCqAISFI-Iv6n2z463-31\&quot; parent=\&quot;1\&quot; style=\&quot;shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;\&quot; value=\&quot;\&quot; vertex=\&quot;1\&quot;&gt;\n          &lt;mxGeometry height=\&quot;540\&quot; width=\&quot;1210\&quot; x=\&quot;-460\&quot; y=\&quot;480\&quot; as=\&quot;geometry\&quot; /&gt;\n        &lt;/mxCell&gt;\n        &lt;mxCell id=\&quot;GV3LY6IxdiBlDHp-VR2O-3\&quot; parent=\&quot;1\&quot; style=\&quot;swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;\&quot; value=\&quot;&amp;lt;p style=&amp;quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; line-height: normal; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&amp;quot;&amp;gt;CharacterBase&amp;lt;/p&amp;gt;\&quot; vertex=\&quot;1\&quot;&gt;\n          &lt;mxGeometry height=\&quot;146\&quot; width=\&quot;270\&quot; x=\&quot;150\&quot; y=\&quot;-30\&quot; as=\&quot;geometry\&quot; /&gt;\n        &lt;/mxCell&gt;\n      &lt;/root&gt;\n    &lt;/mxGraphModel&gt;\n  &lt;/diagram&gt;\n&lt;/mxfile&gt;\n&quot;}">
+                                        <div class="svg-zoom-container"
+                                            style="position:relative;width:100%;max-width:900px;height:600px;overflow:hidden;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.15);cursor:grab;">
+                                            <img src="files/Technical Design.svg" alt="Technical Design Diagram"
+                                                class="zoomable-svg"
+                                                style="position:absolute;top:0;left:0;width:100%;height:auto;transform-origin:0 0;user-select:none;">
+                                            <div class="zoom-controls"
+                                                style="position:absolute;top:10px;right:10px;display:flex;gap:8px;z-index:10;">
+                                                <button class="zoom-btn zoom-in"
+                                                    style="width:36px;height:36px;border:none;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.15);cursor:pointer;font-size:18px;font-weight:bold;">+</button>
+                                                <button class="zoom-btn zoom-out"
+                                                    style="width:36px;height:36px;border:none;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.15);cursor:pointer;font-size:18px;font-weight:bold;">−</button>
+                                                <button class="zoom-btn zoom-reset"
+                                                    style="width:36px;height:36px;border:none;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.15);cursor:pointer;font-size:18px;font-weight:800;">⟲</button>
+                                            </div>
                                         </div>
-                                        <script type="text/javascript"
-                                            src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
                                     </div>
                                 </div>
                                 <div class="sub-item">
@@ -1014,6 +318,27 @@
                             <div class="badge-shine"></div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-nav-section">
+            <div class="container">
+                <div class="project-nav">
+                    <div class="nav-arrow prev disabled">
+                        <span class="arrow-icon">←</span>
+                        <div class="nav-text-group">
+                            <span class="nav-label">Previous Project</span>
+                            <span class="nav-title">Coming Soon</span>
+                        </div>
+                    </div>
+                    <a class="nav-arrow next" href="mr_game.html">
+                        <div class="nav-text-group">
+                            <span class="nav-label">Next Project</span>
+                            <span class="nav-title">MR Game: Ghost Gym</span>
+                        </div>
+                        <span class="arrow-icon">→</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -1255,6 +580,189 @@
                     badge.style.transition = 'transform 0.5s ease-out';
                 });
             });
+        })();
+
+        // SVG Zoom and Pan functionality
+        (function () {
+            const container = document.querySelector('.svg-zoom-container');
+            if (!container) return;
+
+            const img = container.querySelector('.zoomable-svg');
+            const zoomInBtn = container.querySelector('.zoom-in');
+            const zoomOutBtn = container.querySelector('.zoom-out');
+            const resetBtn = container.querySelector('.zoom-reset');
+
+            const MIN_SCALE = 1;
+            const MAX_SCALE = 5;
+            const ZOOM_FACTOR = 1.2;
+
+            let scale = 1;
+            let translateX = 0;
+            let translateY = 0;
+
+            let isPointerDown = false;
+            let activePointerId = null;
+            let dragStartX = 0;
+            let dragStartY = 0;
+
+            let rafId = null;
+
+            container.style.touchAction = 'none';
+            img.style.willChange = 'transform';
+            img.draggable = false;
+            img.addEventListener('dragstart', (e) => e.preventDefault());
+
+            function getBaseImageSize() {
+                const containerWidth = container.clientWidth;
+                if (img.naturalWidth && img.naturalHeight) {
+                    return {
+                        width: containerWidth,
+                        height: containerWidth * (img.naturalHeight / img.naturalWidth)
+                    };
+                }
+
+                const rect = img.getBoundingClientRect();
+                return {
+                    width: containerWidth,
+                    height: rect.height || container.clientHeight
+                };
+            }
+
+            function clampPan() {
+                const { width: baseWidth, height: baseHeight } = getBaseImageSize();
+                const containerWidth = container.clientWidth;
+                const containerHeight = container.clientHeight;
+
+                const scaledWidth = baseWidth * scale;
+                const scaledHeight = baseHeight * scale;
+
+                let minX = containerWidth - scaledWidth;
+                let maxX = 0;
+                let minY = containerHeight - scaledHeight;
+                let maxY = 0;
+
+                if (scaledWidth <= containerWidth) {
+                    minX = maxX = (containerWidth - scaledWidth) / 2;
+                }
+
+                if (scaledHeight <= containerHeight) {
+                    minY = maxY = (containerHeight - scaledHeight) / 2;
+                }
+
+                translateX = Math.min(maxX, Math.max(minX, translateX));
+                translateY = Math.min(maxY, Math.max(minY, translateY));
+            }
+
+            function render() {
+                rafId = null;
+                img.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
+            }
+
+            function requestRender() {
+                if (rafId) return;
+                rafId = requestAnimationFrame(render);
+            }
+
+            function zoomAt(nextScale, clientX, clientY) {
+                const boundedScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, nextScale));
+                if (boundedScale === scale) return;
+
+                const rect = container.getBoundingClientRect();
+                const cx = clientX - rect.left;
+                const cy = clientY - rect.top;
+
+                const worldX = (cx - translateX) / scale;
+                const worldY = (cy - translateY) / scale;
+
+                scale = boundedScale;
+                translateX = cx - worldX * scale;
+                translateY = cy - worldY * scale;
+
+                clampPan();
+                requestRender();
+            }
+
+            function resetView() {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                clampPan();
+                requestRender();
+            }
+
+            zoomInBtn.addEventListener('click', () => {
+                const rect = container.getBoundingClientRect();
+                zoomAt(scale * ZOOM_FACTOR, rect.left + rect.width / 2, rect.top + rect.height / 2);
+            });
+
+            zoomOutBtn.addEventListener('click', () => {
+                const rect = container.getBoundingClientRect();
+                zoomAt(scale / ZOOM_FACTOR, rect.left + rect.width / 2, rect.top + rect.height / 2);
+            });
+
+            resetBtn.addEventListener('click', resetView);
+
+            container.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const nextScale = e.deltaY > 0 ? scale / ZOOM_FACTOR : scale * ZOOM_FACTOR;
+                zoomAt(nextScale, e.clientX, e.clientY);
+            }, { passive: false });
+
+            container.addEventListener('pointerdown', (e) => {
+                if (e.target.closest('.zoom-controls')) return;
+                if (e.button !== 0) return;
+
+                e.preventDefault();
+
+                isPointerDown = true;
+                activePointerId = e.pointerId;
+                dragStartX = e.clientX - translateX;
+                dragStartY = e.clientY - translateY;
+
+                container.style.cursor = 'grabbing';
+                if (typeof container.setPointerCapture === 'function') {
+                    try {
+                        container.setPointerCapture(e.pointerId);
+                    } catch (_) {
+                        // Some browsers may throw here; dragging still works via window listeners below.
+                    }
+                }
+            });
+
+            window.addEventListener('pointermove', (e) => {
+                if (!isPointerDown || e.pointerId !== activePointerId) return;
+
+                translateX = e.clientX - dragStartX;
+                translateY = e.clientY - dragStartY;
+                clampPan();
+                requestRender();
+            });
+
+            function endPan(e) {
+                if (!isPointerDown || e.pointerId !== activePointerId) return;
+                isPointerDown = false;
+                activePointerId = null;
+                container.style.cursor = 'grab';
+                if (typeof container.hasPointerCapture === 'function' &&
+                    typeof container.releasePointerCapture === 'function' &&
+                    container.hasPointerCapture(e.pointerId)) {
+                    container.releasePointerCapture(e.pointerId);
+                }
+            }
+
+            window.addEventListener('pointerup', endPan);
+            window.addEventListener('pointercancel', endPan);
+
+            window.addEventListener('resize', () => {
+                clampPan();
+                requestRender();
+            });
+
+            if (img.complete) {
+                resetView();
+            } else {
+                img.addEventListener('load', resetView, { once: true });
+            }
         })();
     </script>
 
