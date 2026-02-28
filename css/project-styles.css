@@ -92,9 +92,15 @@ nav {
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary-color);
+    display: inline-flex;
+    align-items: center;
+    line-height: 0;
+}
+
+.logo img {
+    display: block;
+    height: 55px;
+    width: auto;
 }
 
 .nav-links {
@@ -511,7 +517,7 @@ nav {
 
 .badge-container {
     position: relative;
-    width: 100%;
+    width: 80%;
     border-radius: 10px;
     overflow: hidden;
 }

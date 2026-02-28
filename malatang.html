@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malatang - Xinyue Wang</title>
+    <link rel="icon" type="image/gif" href="pictures/pixal-animation.gif">
     <link rel="stylesheet" href="css/project-styles.css">
 </head>
 
@@ -13,7 +14,9 @@
     <header>
         <div class="container">
             <nav>
-                <a href="index.html" class="logo">Xinyue Wang</a>
+                <a href="index.html" class="logo" aria-label="Xinyue Wang home">
+                    <img src="pictures/pixal-animation.gif" alt="Xinyue Wang logo">
+                </a>
                 <ul class="nav-links">
                     <li><a href="index.html#about">About</a></li>
                     <li><a href="index.html#portfolio" class="active">Portfolio</a></li>
@@ -35,7 +38,8 @@
         <section class="video-section">
             <div class="container">
                 <div class="video-wrapper">
-                    <iframe src="" title="Malatang" frameborder="0"
+                    <iframe src="https://www.youtube.com/embed/DKWqdiN4BtM?si=kIbl-EtMM-y4oewt"
+                        title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
                     </iframe>
@@ -93,7 +97,10 @@
                             <span class="accordion-title">
                                 <span class="dropdown-leading-icon" aria-hidden="true">
                                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                                        <path d="M4 17l6-6-6-6M12 19h8" />
+                                        <rect x="3" y="3" width="7" height="7" rx="1" />
+                                        <rect x="14" y="3" width="7" height="7" rx="1" />
+                                        <rect x="3" y="14" width="7" height="7" rx="1" />
+                                        <rect x="14" y="14" width="7" height="7" rx="1" />
                                     </svg>
                                 </span>
                                 Game Design & Mechanics
@@ -102,12 +109,14 @@
                         </button>
                         <div class="accordion-content">
                             <ul>
-                                <li>Designing a <strong>clear and intuitive collectible loop</strong> for a first-time
-                                    player</li>
-                                <li>Balancing <strong>level layout</strong> to guide the player without explicit
-                                    instructions</li>
-                                <li>Handling <strong>collision detection</strong> for ingredient pickups and the cooking
-                                    pot trigger</li>
+                                <li><strong>UI/UX Flow</strong> - Managing tutorial progression, proximity prompts, and
+                                    win state displays</li>
+                                <li><strong>Game Mechanics</strong> - Balancing ingredient collection, cooking
+                                    interaction, and platforming elements</li>
+                                <li><strong>Audio-Visual Feedback</strong> - Coordinating sound effects and particle
+                                    systems with player actions</li>
+                                <li><strong>Level Design</strong> - Implementing moving platforms and respawn system for
+                                    player deaths</li>
                             </ul>
                             <div class="sub-accordion"></div>
                         </div>
@@ -117,10 +126,7 @@
                             <span class="accordion-title">
                                 <span class="dropdown-leading-icon" aria-hidden="true">
                                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                                        <rect x="3" y="3" width="7" height="7" rx="1" />
-                                        <rect x="14" y="3" width="7" height="7" rx="1" />
-                                        <rect x="3" y="14" width="7" height="7" rx="1" />
-                                        <rect x="14" y="14" width="7" height="7" rx="1" />
+                                        <path d="M4 17l6-6-6-6M12 19h8" />
                                     </svg>
                                 </span>
                                 Technical Implementation
@@ -129,12 +135,16 @@
                         </button>
                         <div class="accordion-content">
                             <ul>
-                                <li>Implemented <strong>3D character movement</strong> with physics-based controls</li>
-                                <li>Built a <strong>collectible tracking system</strong> using C# scripts</li>
-                                <li>Created a <strong>win condition trigger</strong> when all ingredients are cooked
+                                <li><strong>Character Physics</strong> - Handling CharacterController gravity, jumping,
+                                    and platform parenting</li>
+                                <li><strong>System Integration</strong> - Connecting inventory, cooking validation, and
+                                    UI across multiple scripts</li>
+                                <li><strong>Input Handling</strong> - Managing both legacy and new Unity Input System
                                 </li>
-                                <li>Learned Unity's <strong>scene management</strong> and <strong>UI system</strong> for
-                                    game state feedback</li>
+                                <li><strong>State Management</strong> - Implementing tutorial states and game win/lose
+                                    conditions</li>
+                                <li><strong>Collision Detection</strong> - Using tags, triggers, and distance checks for
+                                    interactions</li>
                             </ul>
                         </div>
                     </div>

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xinyue Wang - Resume & Portfolio</title>
+    <link rel="icon" type="image/gif" href="pictures/pixal-animation.gif">
     <style>
         /* --- 1. 全局变量与重置 (CSS Variables & Reset) --- */
         :root {
@@ -143,9 +144,15 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
+            display: inline-flex;
+            align-items: center;
+            line-height: 0;
+        }
+
+        .logo img {
+            display: block;
+            height: 55px;
+            width: auto;
         }
 
         .nav-links {
@@ -310,7 +317,7 @@
         /* --- Skills Section --- */
         .skills-section {
             max-width: 900px;
-            margin: 80px auto;
+            margin: 0 auto;
             font-family: 'Inter', sans-serif;
         }
 
@@ -329,23 +336,8 @@
 
         .skills-row {
             display: grid;
+            grid-template-columns: repeat(4, minmax(160px, 1fr));
             gap: 25px;
-        }
-
-        .skills-row.primary {
-            grid-template-columns: repeat(4, minmax(160px, 1fr));
-        }
-
-        .skills-row.secondary {
-            grid-template-columns: repeat(4, minmax(160px, 1fr));
-        }
-
-        .skills-row.languages {
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        }
-
-        .skills-row.languages .badges+.badges {
-            margin-top: 10px;
         }
 
         .skill-category {
@@ -373,6 +365,8 @@
             font-weight: 500;
             transition: all 0.3s ease;
             cursor: default;
+            text-align: center;
+            white-space: nowrap;
         }
 
         .badge:hover {
@@ -381,9 +375,17 @@
             transform: translateY(-2px);
         }
 
+        .skill-category.two-row-badges .badges {
+            flex-wrap: nowrap;
+        }
+
+        .skill-category.two-row-badges .badges+.badges {
+            margin-top: 10px;
+        }
+
         @media (max-width: 768px) {
             .skills-section {
-                margin: 40px 20px;
+                margin: 0 20px;
                 max-width: 100%;
             }
 
@@ -392,14 +394,9 @@
                 margin-bottom: 30px;
             }
 
-            .skills-row.primary,
-            .skills-row.secondary {
+            .skills-row {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 15px;
-            }
-
-            .skills-row.languages {
-                grid-template-columns: 1fr;
             }
 
             .skill-category {
@@ -418,15 +415,14 @@
 
         @media (max-width: 480px) {
             .skills-section {
-                margin: 30px 15px;
+                margin: 0 15px;
             }
 
             .skills-section h2 {
                 font-size: 1.75rem;
             }
 
-            .skills-row.primary,
-            .skills-row.secondary {
+            .skills-row {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
@@ -487,7 +483,9 @@
     <header>
         <div class="container">
             <nav>
-                <a href="#" class="logo">Xinyue Wang</a>
+                <a href="#" class="logo" aria-label="Xinyue Wang home">
+                    <img src="pictures/pixal-animation.gif" alt="Xinyue Wang logo">
+                </a>
                 <ul class="nav-links">
                     <li><a href="#about" class="active">About</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
@@ -518,9 +516,21 @@
                     style="width:100%; height:100%; object-fit:cover; border-radius:10px;">
             </div>
             <div>
-                <p>Hi, I’m Xinyue Wang, Game Developer. I’m focusing on creating immersive and engaging gaming
-                    experiences. This portfolio showcases my projects, highlighting my love for storytelling, innovative
-                    design, and gameplay. Let’s explore these creative worlds together!...</p>
+                <p>Hi, I’m Xinyue Wang — a Game Developer who loves turning wild ideas into playable worlds.
+
+                    <br><br>I design with <strong>empathy</strong> (yes, I overthink how players feel), think a little
+                    <strong>outside the box</strong> (sometimes
+                    I move the box entirely), and <strong>take full ownership</strong> from concept to code. I enjoy
+                    connecting big
+                    design ideas with real implementation — making sure the “cool vision” actually works in-game.
+
+                    <br><br>With a strong <strong>aesthetic sense</strong> and a soft spot for storytelling, I build
+                    experiences
+                    that are
+                    immersive, thoughtful, and just a little unexpected.
+
+                    <br><br>Welcome to my creative playground 🎮✨
+                </p>
             </div>
         </div>
     </section>
@@ -548,10 +558,12 @@
                 </div>
 
                 <div class="skill-category">
-                    <h3>Web Design</h3>
+                    <h3>Web Design & Digital Marketing</h3>
                     <div class="badges">
                         <span class="badge">HTML</span>
                         <span class="badge">CSS</span>
+                        <span class="badge">SEO</span>
+                        <span class="badge">SEM</span>
                     </div>
                 </div>
 
@@ -565,21 +577,18 @@
             </div>
 
             <div class="skills-row secondary">
-                <div class="skill-category">
-                    <h3>Video Editing</h3>
+                <div class="skill-category two-row-badges">
+                    <h3>Video Editing & VFX</h3>
                     <div class="badges">
                         <span class="badge">Final Cut Pro X</span>
                         <span class="badge">Premiere</span>
                     </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>VFX</h3>
                     <div class="badges">
                         <span class="badge">After Effects</span>
                         <span class="badge">Unreal Engine</span>
                     </div>
                 </div>
+
                 <div class="skill-category">
                     <h3>Graphic Design</h3>
                     <div class="badges">
@@ -588,24 +597,14 @@
                     </div>
                 </div>
 
-                <div class="skill-category">
-                    <h3>Digital Marketing</h3>
-                    <div class="badges">
-                        <span class="badge">SEO</span>
-                        <span class="badge">SEM</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="skills-row languages">
-                <div class="skill-category">
+                <div class="skill-category two-row-badges">
                     <h3>Languages</h3>
                     <div class="badges">
                         <span class="badge">Chinese (Native)</span>
                         <span class="badge">English (B2)</span>
+                        <span class="badge">Spanish (B1)</span>
                     </div>
                     <div class="badges">
-                        <span class="badge">Spanish (B1)</span>
                         <span class="badge">Finnish (A2)</span>
                         <span class="badge">German (A1)</span>
                     </div>
