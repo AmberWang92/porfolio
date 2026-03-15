@@ -7,438 +7,7 @@
     <title>Xinyue Wang - Resume & Portfolio</title>
     <link rel="icon" type="image/gif" href="pictures/pixal-animation.gif">
     <link rel="stylesheet" href="css/skill-breaker.css">
-    <style>
-        /* --- 1. 全局变量与重置 (CSS Variables & Reset) --- */
-        :root {
-            --primary-color: #2c3e50;
-            /* 主色调：深蓝灰 */
-            --accent-color: #3498db;
-            /* 强调色：亮蓝 */
-            --text-color: #333333;
-            /* 正文颜色 */
-            --bg-color: #ffffff;
-            /* 背景色 */
-            --light-bg: #f9f9f9;
-            /* 浅灰背景，用于区分板块 */
-            --header-bg: #ffffff;
-            --nav-pill-bg: #f5f5f7;
-            --nav-link-color: #1d1d1f;
-            --nav-link-hover-color: #000000;
-            --nav-indicator-bg: #1d1d1f;
-            --hero-gradient-start: #f5f7fa;
-            --hero-gradient-end: #c3cfe2;
-            --muted-text: #666666;
-            --profile-placeholder-bg: #dddddd;
-            --profile-placeholder-text: #888888;
-            --card-bg: #ffffff;
-            --project-img-bg: #eeeeee;
-            --project-img-text: #aaaaaa;
-            --badge-bg: #f3f3f3;
-            --badge-hover-bg: #2563eb;
-            --btn-hover-bg: #2980b9;
-            --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.05);
-            --shadow-card: 0 5px 15px rgba(0, 0, 0, 0.1);
-            --footer-bg: #2c3e50;
-            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            --spacing-unit: 20px;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --primary-color: #d6e0ea;
-                --accent-color: #5aa7e6;
-                --text-color: #e4e7eb;
-                --bg-color: #12161b;
-                --light-bg: #1b2128;
-                --header-bg: #151b22;
-                --nav-pill-bg: #252d37;
-                --nav-link-color: #d4d9df;
-                --nav-link-hover-color: #ffffff;
-                --nav-indicator-bg: #3a4655;
-                --hero-gradient-start: #161b22;
-                --hero-gradient-end: #243344;
-                --muted-text: #b8c0cb;
-                --profile-placeholder-bg: #2a313a;
-                --profile-placeholder-text: #aab3be;
-                --card-bg: #1b222b;
-                --project-img-bg: #2a313a;
-                --project-img-text: #9aa5b1;
-                --badge-bg: #2a313a;
-                --badge-hover-bg: #3f82ff;
-                --btn-hover-bg: #3f82ff;
-                --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.35);
-                --shadow-card: 0 5px 15px rgba(0, 0, 0, 0.35);
-                --footer-bg: #0d1117;
-            }
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-main);
-            color: var(--text-color);
-            line-height: 1.6;
-            background-color: var(--bg-color);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: 0.3s;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        /* --- 2. 通用布局类 (Layout Utilities) --- */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 var(--spacing-unit);
-        }
-
-        section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 50px;
-            color: var(--primary-color);
-            position: relative;
-        }
-
-        /* 标题下的小装饰线 */
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 3px;
-            background: var(--accent-color);
-            margin: 15px auto 0;
-        }
-
-        /* --- 3. 导航栏 (Navigation) --- */
-        header {
-            background: var(--header-bg);
-            box-shadow: var(--shadow-soft);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-
-        .logo {
-            display: inline-flex;
-            align-items: center;
-            line-height: 0;
-        }
-
-        .logo img {
-            display: block;
-            height: 55px;
-            width: auto;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 0;
-            background: var(--nav-pill-bg);
-            border-radius: 50px;
-            padding: 4px;
-            position: relative;
-            align-items: center;
-        }
-
-        .nav-links a {
-            padding: 10px 24px;
-            border-radius: 50px;
-            transition: color 0.25s ease;
-            font-size: 0.95rem;
-            color: var(--nav-link-color);
-            position: relative;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .nav-links a:hover {
-            color: var(--nav-link-hover-color);
-        }
-
-        .nav-links a.active {
-            color: #fff;
-        }
-
-        .nav-indicator {
-            position: absolute;
-            top: 4px;
-            bottom: 4px;
-            left: 0;
-            width: 0;
-            border-radius: 999px;
-            background: var(--nav-indicator-bg);
-            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.2s ease;
-            opacity: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* --- 4. Hero 区域 (Hero Section) --- */
-        .hero {
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: linear-gradient(135deg, var(--hero-gradient-start) 0%, var(--hero-gradient-end) 100%);
-            position: relative;
-            background-color: var(--profile-placeholder-bg);
-            /* 占位符背景 */
-            border-radius: 10px;
-            object-fit: cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--profile-placeholder-text);
-        }
-
-        /* --- 6. 简历/经历 (Resume/Timeline) --- */
-        .bg-light {
-            background-color: var(--light-bg);
-        }
-
-        .resume-item {
-            border-left: 3px solid var(--accent-color);
-            padding-left: 20px;
-            margin-bottom: 40px;
-        }
-
-        .resume-item h3 {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-
-        .resume-item .date {
-            font-size: 0.9rem;
-            color: var(--muted-text);
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        /* --- 7. 作品集 (Portfolio Grid) --- */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--shadow-card);
-            transition: transform 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .project-img {
-            height: 200px;
-            background-color: var(--project-img-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--project-img-text);
-        }
-
-        .project-info {
-            padding: 20px;
-        }
-
-        /* --- Skills Section --- */
-        .skills-section {
-            max-width: 900px;
-            margin: 0 auto;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .skills-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            color: var(--primary-color);
-        }
-
-        .skills-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .skills-row {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(160px, 1fr));
-            gap: 25px;
-        }
-
-        .skill-category {
-            margin-bottom: 30px;
-        }
-
-        .skill-category h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--muted-text);
-        }
-
-        .badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .badge {
-            padding: 8px 16px;
-            border-radius: 20px;
-            background: var(--badge-bg);
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            cursor: default;
-            text-align: center;
-            white-space: nowrap;
-        }
-
-        .badge:hover {
-            background: var(--badge-hover-bg);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .skill-category.two-row-badges .badges {
-            flex-wrap: nowrap;
-        }
-
-        .skill-category.two-row-badges .badges+.badges {
-            margin-top: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .skills-section {
-                margin: 0 20px;
-                max-width: 100%;
-            }
-
-            .skills-section h2 {
-                font-size: 2rem;
-                margin-bottom: 30px;
-            }
-
-            .skills-row {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-            }
-
-            .skill-category {
-                margin-bottom: 20px;
-            }
-
-            .skill-category h3 {
-                font-size: 1rem;
-            }
-
-            .badge {
-                padding: 6px 12px;
-                font-size: 0.85rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .skills-section {
-                margin: 0 15px;
-            }
-
-            .skills-section h2 {
-                font-size: 1.75rem;
-            }
-
-            .skills-row {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .skill-category h3 {
-                font-size: 0.95rem;
-                margin-bottom: 10px;
-            }
-
-            .badges {
-                gap: 8px;
-            }
-
-            .badge {
-                padding: 5px 10px;
-                font-size: 0.8rem;
-            }
-        }
-
-        .project-info h3 {
-            margin-bottom: 10px;
-        }
-
-        .project-info a {
-            color: var(--accent-color);
-            font-weight: bold;
-        }
-
-        /* --- 8. 页脚 (Footer) --- */
-        footer {
-            background: var(--footer-bg);
-            color: #fff;
-            text-align: center;
-            padding: 40px 0;
-        }
-
-        /* --- 移动端适配 (Responsive) --- */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            /* 简单处理：手机端隐藏菜单，实际开发可加汉堡菜单 */
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/index-styles.css">
 </head>
 
 <body>
@@ -485,7 +54,6 @@
     <section id="about" class="container">
         <h2 class="section-title">About Me</h2>
         <div class="about-content">
-            <!-- Placeholder: Please replace src with your real photo path -->
             <div class="profile-img">
                 <img src="pictures/bio.jpeg" alt="Xinyue Wang"
                     style="width:100%; height:100%; object-fit:cover; border-radius:10px;">
@@ -698,6 +266,93 @@
                     <a href="thermae.html">View Details &rarr;</a>
                 </div>
             </article>
+
+            <!-- Project 5 -->
+            <article class="project-card">
+                <div class="project-img">
+                    <img src="pictures/ripper_island_poster.jpg" alt="Ripper Island Poster"
+                        style="width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div class="project-info">
+                    <h3>Ripper Island</h3>
+                    <div class="tags-container" style="display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0;">
+                        <span class="tag"
+                            style="background: var(--accent-color); color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 500;">Unity</span>
+                        <span class="tag"
+                            style="background: var(--accent-color); color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 500;">C#</span>
+                             <span class="tag"
+                            style="background: var(--accent-color); color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 500;">Open-World</span>
+                    </div>
+                    <p>An <strong>open-world</strong> survival game designed for the class <strong>Game Concept Design</strong> with my team.
+                    </p>
+                    <br>
+                    <a href="ripper_island.html">View Details &rarr;</a>
+                </div>
+            </article>
+        </div>
+
+        <h2 class="section-title" style="margin-top: 60px;">Art Gallery</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px;">
+            <a href="pictures/galary/China%20Power%20Poster1.jpg" target="_blank" rel="noopener noreferrer"
+                style="display: block; border-radius: 14px; overflow: hidden;">
+                <img src="pictures/galary/China%20Power%20Poster1.jpg" alt="China Power Poster 1"
+                    style="width: 100%; height: 180px; object-fit: cover; display: block;">
+            </a>
+            <a href="pictures/galary/China%20Power%20Poster2.jpg" target="_blank" rel="noopener noreferrer"
+                style="display: block; border-radius: 14px; overflow: hidden;">
+                <img src="pictures/galary/China%20Power%20Poster2.jpg" alt="China Power Poster 2"
+                    style="width: 100%; height: 180px; object-fit: cover; display: block;">
+            </a>
+            <a href="pictures/galary/Figure%20Design.jpg" target="_blank" rel="noopener noreferrer"
+                style="display: block; border-radius: 14px; overflow: hidden;">
+                <img src="pictures/galary/Figure%20Design.jpg" alt="Figure Design"
+                    style="width: 100%; height: 180px; object-fit: cover; display: block;">
+            </a>
+            <a href="pictures/galary/The%20Scene%20Design1.jpg" target="_blank" rel="noopener noreferrer"
+                style="display: block; border-radius: 14px; overflow: hidden;">
+                <img src="pictures/galary/The%20Scene%20Design1.jpg" alt="The Scene Design 1"
+                    style="width: 100%; height: 180px; object-fit: cover; display: block;">
+            </a>
+            <a href="pictures/galary/The%20Scene%20Design2.jpg" target="_blank" rel="noopener noreferrer"
+                style="display: block; border-radius: 14px; overflow: hidden;">
+                <img src="pictures/galary/The%20Scene%20Design2.jpg" alt="The Scene Design 2"
+                    style="width: 100%; height: 180px; object-fit: cover; display: block;">
+            </a>
+            <a href="pictures/galary/Movie%20Props%20Design_Chair%201.jpg" target="_blank" rel="noopener noreferrer"
+                style="display: block; border-radius: 14px; overflow: hidden;">
+                <img src="pictures/galary/Movie%20Props%20Design_Chair%201.jpg" alt="Movie Props Design - Chair 1"
+                    style="width: 100%; height: 180px; object-fit: cover; display: block;">
+            </a>
+            <a href="pictures/galary/Movie%20Props%20Design_Chair%202.jpg" target="_blank" rel="noopener noreferrer"
+                style="display: block; border-radius: 14px; overflow: hidden;">
+                <img src="pictures/galary/Movie%20Props%20Design_Chair%202.jpg" alt="Movie Props Design - Chair 2"
+                    style="width: 100%; height: 180px; object-fit: cover; display: block;">
+            </a>
+            <a href="pictures/galary/Movie%20Props%20Design_Light%201.jpg" target="_blank" rel="noopener noreferrer"
+                style="display: block; border-radius: 14px; overflow: hidden;">
+                <img src="pictures/galary/Movie%20Props%20Design_Light%201.jpg" alt="Movie Props Design - Light 1"
+                    style="width: 100%; height: 180px; object-fit: cover; display: block;">
+            </a>
+            <a href="pictures/galary/Movie%20Props%20Design_Light%202.jpg" target="_blank" rel="noopener noreferrer"
+                style="display: block; border-radius: 14px; overflow: hidden;">
+                <img src="pictures/galary/Movie%20Props%20Design_Light%202.jpg" alt="Movie Props Design - Light 2"
+                    style="width: 100%; height: 180px; object-fit: cover; display: block;">
+            </a>
+            <a href="pictures/galary/Bathroom.jpg" target="_blank" rel="noopener noreferrer"
+                style="display: block; border-radius: 14px; overflow: hidden;">
+                <img src="pictures/galary/Bathroom.jpg" alt="Bathroom"
+                    style="width: 100%; height: 180px; object-fit: cover; display: block;">
+            </a>
+            <a href="pictures/galary/Clocks.jpg" target="_blank" rel="noopener noreferrer"
+                style="display: block; border-radius: 14px; overflow: hidden;">
+                <img src="pictures/galary/Clocks.jpg" alt="Clocks"
+                    style="width: 100%; height: 180px; object-fit: cover; display: block;">
+            </a>
+            <a href="pictures/galary/Jeep.jpg" target="_blank" rel="noopener noreferrer"
+                style="display: block; border-radius: 14px; overflow: hidden;">
+                <img src="pictures/galary/Jeep.jpg" alt="Jeep"
+                    style="width: 100%; height: 180px; object-fit: cover; display: block;">
+            </a>
         </div>
     </section>
 

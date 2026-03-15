@@ -323,9 +323,10 @@ class SkillBreakerGame {
         this.ctx.shadowBlur = 0;
         
         // Draw ball
+        const ballColor = getComputedStyle(document.documentElement).getPropertyValue('--ball-color').trim();
         this.ctx.shadowBlur = 15;
-        this.ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
-        this.ctx.fillStyle = '#ffffff';
+        this.ctx.shadowColor = ballColor === '#333333' ? 'rgba(51, 51, 51, 0.8)' : 'rgba(255, 255, 255, 0.8)';
+        this.ctx.fillStyle = ballColor;
         this.ctx.beginPath();
         this.ctx.arc(this.ball.x, this.ball.y, this.ball.radius, 0, Math.PI * 2);
         this.ctx.fill();
