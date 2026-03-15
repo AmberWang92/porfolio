@@ -68,9 +68,9 @@ class SkillBreakerGame {
             x: this.canvas.width / 2,
             y: this.canvas.height / 2,
             radius: 8,
-            velocityX: 4,
-            velocityY: -4,
-            speed: 4
+            velocityX: 6,
+            velocityY: -6,
+            speed: 6
         };
         
         // Blocks - text elements
@@ -84,7 +84,7 @@ class SkillBreakerGame {
         const gap = 15;
         
         // Title blocks: "Hello", ", I'm", "Xinyue", "Wang"
-        const titleTexts = ['Hello', ", I'm", 'Xinyue', 'Wang'];
+        const titleTexts = ['Hello,', "I'm", 'Xinyue', 'Wang'];
         const titleY = startY;
         const titleBlockWidth = 100;
         const titleTotalWidth = titleTexts.length * titleBlockWidth + (titleTexts.length - 1) * gap;
@@ -226,6 +226,10 @@ class SkillBreakerGame {
             // Add angle based on where ball hits paddle
             const hitPos = (this.ball.x - this.paddle.x) / this.paddle.width;
             this.ball.velocityX = (hitPos - 0.5) * 8;
+            
+            // Increase ball speed by 10% on each paddle bounce
+            this.ball.velocityX *= 1.1;
+            this.ball.velocityY *= 1.1;
         }
         
         // Block collision
@@ -339,14 +343,83 @@ class SkillBreakerGame {
     
     showCompletionButton() {
         const button = document.getElementById('hero-cta-button');
+        const fireworkContainer = document.getElementById('firework-container');
+        
         if (button) {
             button.classList.add('show');
+            
+            // Stop fireworks when button is clicked
+            button.addEventListener('click', () => {
+                this.stopFireworks();
+            });
+        }
+        
+        // Create continuous firework particles
+        if (fireworkContainer) {
+            this.fireworksActive = true;
+            this.startContinuousFireworks(fireworkContainer);
+            fireworkContainer.classList.add('show');
         }
         
         // Hide canvas after a short delay
         setTimeout(() => {
             this.canvas.style.opacity = '0';
         }, 500);
+    }
+    
+    startContinuousFireworks(container) {
+        if (!this.fireworksActive) return;
+        
+        this.createFireworkBurst(container);
+        
+        // Schedule next burst
+        this.fireworkTimeout = setTimeout(() => {
+            this.startContinuousFireworks(container);
+        }, 600);
+    }
+    
+    createFireworkBurst(container) {
+        const particlesPerBurst = 24;
+        
+        for (let i = 0; i < particlesPerBurst; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'firework-particle';
+            
+            // Calculate random direction
+            const angle = (Math.PI * 2 * i) / particlesPerBurst;
+            const velocity = 100 + Math.random() * 80;
+            const tx = Math.cos(angle) * velocity;
+            const ty = Math.sin(angle) * velocity;
+            
+            particle.style.setProperty('--tx', `${tx}px`);
+            particle.style.setProperty('--ty', `${ty}px`);
+            particle.style.animationDelay = `${Math.random() * 0.15}s`;
+            
+            container.appendChild(particle);
+            
+            // Remove particle after animation
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.remove();
+                }
+            }, 1700);
+        }
+    }
+    
+    stopFireworks() {
+        this.fireworksActive = false;
+        if (this.fireworkTimeout) {
+            clearTimeout(this.fireworkTimeout);
+        }
+        
+        const fireworkContainer = document.getElementById('firework-container');
+        if (fireworkContainer) {
+            fireworkContainer.classList.remove('show');
+            // Clear remaining particles after fade out
+            setTimeout(() => {
+                fireworkContainer.innerHTML = '';
+            }, 300);
+        }
     }
     
     showStaticHero() {

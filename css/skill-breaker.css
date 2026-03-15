@@ -14,11 +14,14 @@
 
 .hero-game-container {
     width: 100%;
+    max-width: 1080px;
     height: 100%;
+    max-height: 720px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
 }
 
 #skill-breaker-canvas {
@@ -62,6 +65,22 @@
     pointer-events: none;
     z-index: 10;
     transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    padding: 18px 45px;
+    font-size: 1.3rem;
+    background: var(--accent-color);
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+    border: none;
+    border-radius: 15px;
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+#hero-cta-button:hover {
+    background: var(--btn-hover-bg);
+    box-shadow: 0 12px 35px rgba(52, 152, 219, 0.5);
+    transform: translate(-50%, -50%) scale(1.05);
+    color: #ffffff;
 }
 
 #hero-cta-button.show {
@@ -70,13 +89,101 @@
     pointer-events: auto;
 }
 
+/* Firework particles container */
+.firework-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    pointer-events: none;
+    z-index: 9;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.firework-container.show {
+    opacity: 1;
+}
+
+.firework-particle {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    animation: firework-burst 1.5s ease-out forwards;
+}
+
+@keyframes firework-burst {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Different colored particles */
+.firework-particle:nth-child(4n+1) {
+    background: #3498db;
+    box-shadow: 0 0 20px #3498db, 0 0 40px rgba(52, 152, 219, 0.5);
+}
+
+.firework-particle:nth-child(4n+2) {
+    background: #e74c3c;
+    box-shadow: 0 0 20px #e74c3c, 0 0 40px rgba(231, 76, 60, 0.5);
+}
+
+.firework-particle:nth-child(4n+3) {
+    background: #f39c12;
+    box-shadow: 0 0 20px #f39c12, 0 0 40px rgba(243, 156, 18, 0.5);
+}
+
+.firework-particle:nth-child(4n+4) {
+    background: #2ecc71;
+    box-shadow: 0 0 20px #2ecc71, 0 0 40px rgba(46, 204, 113, 0.5);
+}
+
 /* Mobile responsiveness */
+@media (max-width: 1024px) {
+    .hero-game-container {
+        max-width: 960px;
+        max-height: 660px;
+    }
+}
+
 @media (max-width: 768px) {
+    .hero-game-container {
+        max-width: 100%;
+        max-height: 600px;
+        padding: 0 10px;
+    }
+    
     .hero-content h1 {
         font-size: 2.5rem;
     }
     
     .hero-content p {
         font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-game-container {
+        max-height: 480px;
+        padding: 0 10px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
     }
 }
