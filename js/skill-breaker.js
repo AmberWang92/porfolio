@@ -16,6 +16,25 @@ class SkillBreakerGame {
         this.particles = [];
         this.animationId = null;
 
+        this.fireworksActive = false;
+        this.fireworkTimeout = null;
+        this.manualConfettiTimeout = null;
+        this.confettiCleanupTimeout = null;
+        this.confettiFadeTimeout = null;
+
+        // Confetti physics system
+        this.confettiPieces = [];
+        this.confettiColors = ['#FF6B6B', '#FFE66D', '#4ECDC4', '#A8E6CF', '#AA96DA', '#F38181', '#F9ED69', '#2ECC71'];
+        this.confettiGravity = 110; // stronger pull for quicker fall
+        this.confettiAirDrag = 0.97;
+        this.confettiSpeedMultiplier = 2;
+        this.confettiBurstRepeats = 3;
+        this.confettiBurstInterval = 3000;
+        this.confettiSequenceTimeouts = [];
+        this.confettiLoopActive = false;
+        this.confettiFrameId = null;
+        this.lastConfettiTick = null;
+
         // Check for reduced motion preference
         this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -41,7 +60,6 @@ class SkillBreakerGame {
             this.canvas.width = container.clientWidth;
             this.canvas.height = container.clientHeight;
 
-            // Recalculate positions if objects exist
             if (this.paddle) {
                 this.paddle.x = this.canvas.width / 2 - this.paddle.width / 2;
                 this.paddle.y = this.canvas.height - 60;
@@ -60,7 +78,6 @@ class SkillBreakerGame {
     }
 
     setupGameObjects() {
-        // Paddle
         this.paddle = {
             x: this.canvas.width / 2 - 60,
             y: this.canvas.height - 60,
@@ -70,7 +87,6 @@ class SkillBreakerGame {
             dx: 0
         };
 
-        // Ball
         this.ball = {
             x: this.canvas.width / 2,
             y: this.canvas.height / 2,
@@ -80,7 +96,6 @@ class SkillBreakerGame {
             speed: 6
         };
 
-        // Blocks - text elements
         this.blocks = this.createBlocks();
     }
 
@@ -99,7 +114,6 @@ class SkillBreakerGame {
         const startY = 120 * scale + 30;
         const gap = 15 * scale;
 
-        // Title blocks: "Hello", ", I'm", "Xinyue", "Wang"
         const titleTexts = ['Hello,', "I'm", 'Xinyue', 'Wang'];
         const titleY = startY;
         const titleBlockWidth = 110 * scale;
@@ -122,7 +136,6 @@ class SkillBreakerGame {
             titleX += titleBlockWidth + gap;
         });
 
-        // Role blocks: "Game Designer", "Level Designer", "Game Developer"
         const roleTexts = ['Game Designer', 'Level Designer', 'Game Developer'];
         const roleY = titleY + titleBlockHeight + 40 * scale;
         const roleBlockWidth = 150 * scale;
@@ -149,39 +162,30 @@ class SkillBreakerGame {
     }
 
     setupEventListeners() {
-        // Mouse movement
         this.canvas.addEventListener('mousemove', (e) => {
             if (this.state !== 'PLAYING') return;
-
             const rect = this.canvas.getBoundingClientRect();
             const mouseX = e.clientX - rect.left;
             this.paddle.x = mouseX - this.paddle.width / 2;
-
-            // Keep paddle within bounds
             if (this.paddle.x < 0) this.paddle.x = 0;
             if (this.paddle.x + this.paddle.width > this.canvas.width) {
                 this.paddle.x = this.canvas.width - this.paddle.width;
             }
         });
 
-        // Touch movement for mobile
         this.canvas.addEventListener('touchmove', (e) => {
             if (this.state !== 'PLAYING') return;
             e.preventDefault();
-
             const rect = this.canvas.getBoundingClientRect();
             const touch = e.touches[0];
             const touchX = touch.clientX - rect.left;
             this.paddle.x = touchX - this.paddle.width / 2;
-
-            // Keep paddle within bounds
             if (this.paddle.x < 0) this.paddle.x = 0;
             if (this.paddle.x + this.paddle.width > this.canvas.width) {
                 this.paddle.x = this.canvas.width - this.paddle.width;
             }
         }, { passive: false });
 
-        // Keyboard controls
         this.keys = {};
         this.handleKeyDown = (e) => {
             this.keys[e.key] = true;
@@ -189,22 +193,13 @@ class SkillBreakerGame {
         this.handleKeyUp = (e) => {
             this.keys[e.key] = false;
         };
-
         window.addEventListener('keydown', this.handleKeyDown);
         window.addEventListener('keyup', this.handleKeyUp);
 
-        // Update paddle based on arrow keys
         this.updatePaddleFromKeys = () => {
             if (this.state !== 'PLAYING') return;
-
-            if (this.keys['ArrowLeft']) {
-                this.paddle.x -= this.paddle.speed;
-            }
-            if (this.keys['ArrowRight']) {
-                this.paddle.x += this.paddle.speed;
-            }
-
-            // Keep paddle within bounds
+            if (this.keys['ArrowLeft']) this.paddle.x -= this.paddle.speed;
+            if (this.keys['ArrowRight']) this.paddle.x += this.paddle.speed;
             if (this.paddle.x < 0) this.paddle.x = 0;
             if (this.paddle.x + this.paddle.width > this.canvas.width) {
                 this.paddle.x = this.canvas.width - this.paddle.width;
@@ -215,14 +210,11 @@ class SkillBreakerGame {
     update() {
         if (this.state !== 'PLAYING') return;
 
-        // Update paddle from keyboard
         this.updatePaddleFromKeys();
 
-        // Update ball position
         this.ball.x += this.ball.velocityX;
         this.ball.y += this.ball.velocityY;
 
-        // Wall collision
         if (this.ball.x + this.ball.radius > this.canvas.width || this.ball.x - this.ball.radius < 0) {
             this.ball.velocityX = -this.ball.velocityX;
         }
@@ -231,48 +223,32 @@ class SkillBreakerGame {
             this.ball.velocityY = -this.ball.velocityY;
         }
 
-        // Bottom wall - reset ball
         if (this.ball.y + this.ball.radius > this.canvas.height) {
-            this.ball.x = this.canvas.width / 2;
-            this.ball.y = this.canvas.height / 2;
-            this.ball.velocityY = -Math.abs(this.ball.velocityY);
+            this.resetBall();
         }
 
-        // Paddle collision
         if (this.ball.y + this.ball.radius > this.paddle.y &&
             this.ball.x > this.paddle.x &&
             this.ball.x < this.paddle.x + this.paddle.width) {
 
             this.ball.velocityY = -Math.abs(this.ball.velocityY);
-
-            // Add angle based on where ball hits paddle
             const hitPos = (this.ball.x - this.paddle.x) / this.paddle.width;
             this.ball.velocityX = (hitPos - 0.5) * 8;
-
-            // Increase ball speed by 10% on each paddle bounce
             this.ball.velocityX *= 1.1;
             this.ball.velocityY *= 1.1;
         }
 
-        // Block collision
         this.blocks.forEach(block => {
             if (block.destroyed) return;
-
             if (this.ball.x + this.ball.radius > block.x &&
                 this.ball.x - this.ball.radius < block.x + block.width &&
                 this.ball.y + this.ball.radius > block.y &&
                 this.ball.y - this.ball.radius < block.y + block.height) {
 
-                // Reverse ball direction
                 this.ball.velocityY = -this.ball.velocityY;
-
-                // Destroy block
                 block.destroyed = true;
-
-                // Create particles
                 this.createParticles(block.x + block.width / 2, block.y + block.height / 2, block.color);
 
-                // Check win condition
                 if (this.blocks.every(b => b.destroyed)) {
                     this.state = 'COMPLETED';
                     this.showCompletionButton();
@@ -280,7 +256,6 @@ class SkillBreakerGame {
             }
         });
 
-        // Update particles
         this.particles = this.particles.filter(p => {
             p.x += p.vx;
             p.y += p.vy;
@@ -302,15 +277,25 @@ class SkillBreakerGame {
         }
     }
 
+    resetBall() {
+        const initialSpeed = this.ball.speed || 6;
+        const centerX = this.canvas.width / 2;
+        const offsetRange = Math.min(this.canvas.width * 0.15, 80);
+        const randomOffset = (Math.random() - 0.5) * 2 * offsetRange;
+
+        this.ball.x = Math.max(this.ball.radius, Math.min(this.canvas.width - this.ball.radius, centerX + randomOffset));
+        this.ball.y = this.canvas.height / 2;
+
+        const angle = (Math.random() * Math.PI / 4) - (Math.PI / 8);
+        this.ball.velocityX = initialSpeed * Math.sin(angle);
+        this.ball.velocityY = -initialSpeed * Math.cos(angle);
+    }
+
     draw() {
-        // Clear canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // Draw blocks
         this.blocks.forEach(block => {
             if (block.destroyed) return;
-
-            // Block background with glow
             this.ctx.shadowBlur = 15;
             this.ctx.shadowColor = block.color;
             this.ctx.fillStyle = block.color;
@@ -319,7 +304,6 @@ class SkillBreakerGame {
             this.ctx.fill();
             this.ctx.shadowBlur = 0;
 
-            // Block text
             this.ctx.fillStyle = '#ffffff';
             this.ctx.font = `${block.fontSize}px 'Helvetica Neue', sans-serif`;
             this.ctx.textAlign = 'center';
@@ -327,7 +311,6 @@ class SkillBreakerGame {
             this.ctx.fillText(block.text, block.x + block.width / 2, block.y + block.height / 2);
         });
 
-        // Draw particles
         this.particles.forEach(p => {
             this.ctx.fillStyle = p.color.replace('0.8', p.life);
             this.ctx.beginPath();
@@ -335,7 +318,6 @@ class SkillBreakerGame {
             this.ctx.fill();
         });
 
-        // Draw paddle
         this.ctx.shadowBlur = 10;
         this.ctx.shadowColor = 'rgba(52, 152, 219, 0.8)';
         this.ctx.fillStyle = '#3498db';
@@ -344,7 +326,6 @@ class SkillBreakerGame {
         this.ctx.fill();
         this.ctx.shadowBlur = 0;
 
-        // Draw ball
         const ballColor = getComputedStyle(document.documentElement).getPropertyValue('--ball-color').trim();
         this.ctx.shadowBlur = 15;
         this.ctx.shadowColor = ballColor === '#333333' ? 'rgba(51, 51, 51, 0.8)' : 'rgba(255, 255, 255, 0.8)';
@@ -358,7 +339,6 @@ class SkillBreakerGame {
     gameLoop() {
         this.update();
         this.draw();
-
         if (this.state === 'PLAYING') {
             this.animationId = requestAnimationFrame(() => this.gameLoop());
         }
@@ -370,83 +350,252 @@ class SkillBreakerGame {
 
         if (button) {
             button.classList.add('show');
-
-            // Stop fireworks when button is clicked
             button.addEventListener('click', () => {
                 this.stopFireworks();
             });
         }
 
-        // Create continuous firework particles
+        const celebrationDuration = 8500;
+
         if (fireworkContainer) {
             this.fireworksActive = true;
             this.startContinuousFireworks(fireworkContainer);
             fireworkContainer.classList.add('show');
+            this.scheduleConfettiFade(fireworkContainer, celebrationDuration);
         }
 
-        // Hide canvas after a short delay
+        setTimeout(() => {
+            this.stopFireworks();
+        }, celebrationDuration);
+
         setTimeout(() => {
             this.canvas.style.opacity = '0';
         }, 500);
     }
 
     startContinuousFireworks(container) {
-        if (!this.fireworksActive) return;
+        if (!this.fireworksActive || !container) return;
 
-        this.createFireworkBurst(container);
+        // Clear previous scheduled bursts
+        this.confettiSequenceTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
+        this.confettiSequenceTimeouts = [];
 
-        // Schedule next burst
-        this.fireworkTimeout = setTimeout(() => {
-            this.startContinuousFireworks(container);
-        }, 600);
+        const repeats = Math.max(1, this.confettiBurstRepeats || 3);
+        const interval = Math.max(200, this.confettiBurstInterval || 1000);
+
+        const fireBurst = (remaining) => {
+            if (!this.fireworksActive) return;
+            this.createConfettiBurst(container);
+            if (remaining > 1) {
+                const timeoutId = setTimeout(() => fireBurst(remaining - 1), interval);
+                this.confettiSequenceTimeouts.push(timeoutId);
+            }
+        };
+
+        fireBurst(repeats);
     }
 
-    createFireworkBurst(container) {
-        const particlesPerBurst = 24;
+    createConfettiBurst(container) {
+        const particlesPerBurst = 60;
+        const button = document.getElementById('hero-cta-button');
+        const containerRect = container.getBoundingClientRect();
+        let originX = container.clientWidth / 2;
+        let originY = container.clientHeight / 2;
+
+        if (button) {
+            const buttonRect = button.getBoundingClientRect();
+            originX = buttonRect.left - containerRect.left + buttonRect.width / 2;
+            originY = buttonRect.top - containerRect.top + buttonRect.height / 2;
+        }
 
         for (let i = 0; i < particlesPerBurst; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'firework-particle';
+            const pieceEl = document.createElement('div');
+            pieceEl.className = 'firework-particle';
 
-            // Calculate random direction
-            const angle = (Math.PI * 2 * i) / particlesPerBurst;
-            const velocity = 100 + Math.random() * 80;
-            const tx = Math.cos(angle) * velocity;
-            const ty = Math.sin(angle) * velocity;
+            const color = this.confettiColors[i % this.confettiColors.length];
+            pieceEl.style.background = color;
 
-            particle.style.setProperty('--tx', `${tx}px`);
-            particle.style.setProperty('--ty', `${ty}px`);
-            particle.style.animationDelay = `${Math.random() * 0.15}s`;
+            const width = 4 + Math.random() * 9; // keep large pieces smaller overall
+            const height = width * (1.15 + Math.random() * 1.5); // varied rectangular ratios
+            pieceEl.style.width = `${width}px`;
+            pieceEl.style.height = `${height}px`;
 
-            container.appendChild(particle);
+            container.appendChild(pieceEl);
 
-            // Remove particle after animation
-            setTimeout(() => {
-                if (particle.parentNode) {
-                    particle.remove();
+            const spread = (Math.random() - 0.5) * 120;
+            const initialSpeed = 195 + Math.random() * 158;
+            const angle = -Math.PI / 2 + (Math.random() - 0.5) * (Math.PI * 0.7);
+            const vx = Math.cos(angle) * initialSpeed + spread * 0.35;
+            const vy = Math.sin(angle) * initialSpeed;
+            const rotation = Math.random() * 360;
+            const rotationVelocity = (Math.random() - 0.5) * 200;
+            const drag = 0.985 + Math.random() * 0.01;
+            const wind = (Math.random() - 0.5) * 120;
+
+            pieceEl.style.transform = `translate3d(${originX}px, ${originY}px, 0) rotate(${rotation}deg)`;
+
+            this.confettiPieces.push({
+                el: pieceEl,
+                x: originX + (Math.random() - 0.5) * 30,
+                y: originY,
+                vx,
+                vy,
+                rotation,
+                rotationVelocity,
+                drag,
+                wind,
+                life: 1.6 + Math.random() * 1.1
+            });
+        }
+
+        this.ensureConfettiLoop();
+    }
+
+    ensureConfettiLoop() {
+        if (this.confettiLoopActive) return;
+        this.confettiLoopActive = true;
+        this.lastConfettiTick = performance.now();
+
+        const step = (timestamp) => {
+            if (!this.confettiLoopActive && this.confettiPieces.length === 0) {
+                this.confettiFrameId = null;
+                return;
+            }
+
+            const dt = Math.min(0.05, (timestamp - this.lastConfettiTick) / 1000 || 0.016);
+            this.lastConfettiTick = timestamp;
+            this.updateConfettiPieces(dt);
+            this.confettiFrameId = requestAnimationFrame(step);
+        };
+
+        this.confettiFrameId = requestAnimationFrame(step);
+    }
+
+    updateConfettiPieces(dt) {
+        const container = document.getElementById('firework-container');
+        if (!container) return;
+        const boundsHeight = container.clientHeight;
+        const boundsWidth = container.clientWidth;
+
+        const speedMultiplier = this.confettiSpeedMultiplier || 1;
+        const scaledDt = dt * speedMultiplier;
+
+        this.confettiPieces = this.confettiPieces.filter(piece => {
+            piece.vx = piece.vx * piece.drag + (piece.wind || 0) * scaledDt * 0.16;
+            piece.vy = piece.vy * piece.drag + this.confettiGravity * scaledDt;
+            piece.wind *= Math.pow(0.95, speedMultiplier);
+
+            piece.x += piece.vx * scaledDt;
+            piece.y += piece.vy * scaledDt;
+            piece.rotation += piece.rotationVelocity * scaledDt;
+            piece.rotationVelocity *= Math.pow(0.995, speedMultiplier);
+            piece.life -= scaledDt * 0.045;
+
+            if (piece.y > boundsHeight + 80 || piece.x < -80 || piece.x > boundsWidth + 80 || piece.life <= 0) {
+                if (piece.el.parentNode === container) {
+                    container.removeChild(piece.el);
                 }
-            }, 1700);
+                return false;
+            }
+
+            const opacity = Math.max(0, Math.min(1, piece.life));
+            piece.el.style.opacity = opacity;
+            piece.el.style.transform = `translate3d(${piece.x}px, ${piece.y}px, 0) rotate(${piece.rotation}deg)`;
+            return true;
+        });
+
+        if (!this.confettiPieces.length && !this.fireworksActive) {
+            this.stopConfettiLoop();
         }
     }
 
-    stopFireworks() {
+    stopConfettiLoop(clearElements = false) {
+        this.confettiLoopActive = false;
+        if (this.confettiFrameId) {
+            cancelAnimationFrame(this.confettiFrameId);
+            this.confettiFrameId = null;
+        }
+        if (clearElements) {
+            const container = document.getElementById('firework-container');
+            if (container) {
+                container.innerHTML = '';
+            }
+        }
+        this.confettiPieces = [];
+    }
+
+    triggerManualConfetti(duration = 8500) {
+        const container = document.getElementById('firework-container');
+        if (!container) return;
+
+        this.stopFireworks({ skipDelayedClear: true });
+        this.fireworksActive = true;
+        container.classList.add('show');
+        this.startContinuousFireworks(container);
+        this.scheduleConfettiFade(container, duration);
+
+        if (duration !== null) {
+            this.manualConfettiTimeout = setTimeout(() => {
+                this.stopFireworks();
+            }, duration);
+        }
+    }
+
+    scheduleConfettiFade(container, duration) {
+        if (!container || duration == null) return;
+        if (this.confettiFadeTimeout) {
+            clearTimeout(this.confettiFadeTimeout);
+            this.confettiFadeTimeout = null;
+        }
+        container.classList.remove('fade-out');
+        if (duration <= 500) return;
+        this.confettiFadeTimeout = setTimeout(() => {
+            container.classList.add('fade-out');
+            this.confettiFadeTimeout = null;
+        }, duration - 500);
+    }
+
+    stopFireworks(options = {}) {
+        const { skipDelayedClear = false } = options;
         this.fireworksActive = false;
         if (this.fireworkTimeout) {
             clearTimeout(this.fireworkTimeout);
+            this.fireworkTimeout = null;
+        }
+        if (this.manualConfettiTimeout) {
+            clearTimeout(this.manualConfettiTimeout);
+            this.manualConfettiTimeout = null;
+        }
+        if (this.confettiCleanupTimeout) {
+            clearTimeout(this.confettiCleanupTimeout);
+            this.confettiCleanupTimeout = null;
+        }
+        if (this.confettiFadeTimeout) {
+            clearTimeout(this.confettiFadeTimeout);
+            this.confettiFadeTimeout = null;
+        }
+        if (this.confettiSequenceTimeouts.length) {
+            this.confettiSequenceTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
+            this.confettiSequenceTimeouts = [];
         }
 
         const fireworkContainer = document.getElementById('firework-container');
         if (fireworkContainer) {
             fireworkContainer.classList.remove('show');
-            // Clear remaining particles after fade out
-            setTimeout(() => {
+            fireworkContainer.classList.remove('fade-out');
+            this.stopConfettiLoop(true);
+            if (skipDelayedClear) {
                 fireworkContainer.innerHTML = '';
-            }, 300);
+            } else {
+                this.confettiCleanupTimeout = setTimeout(() => {
+                    fireworkContainer.innerHTML = '';
+                    this.confettiCleanupTimeout = null;
+                }, 300);
+            }
         }
     }
 
     showStaticHero() {
-        // For users who prefer reduced motion, show static hero
         const staticHero = document.getElementById('static-hero');
         if (staticHero) {
             staticHero.style.display = 'block';
@@ -486,7 +635,14 @@ if (!CanvasRenderingContext2D.prototype.roundRect) {
     };
 }
 
-// Initialize game when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     const game = new SkillBreakerGame('skill-breaker-canvas');
+    window.skillBreakerGame = game;
+
+    const confettiBtn = document.getElementById('confetti-test-button');
+    if (confettiBtn) {
+        confettiBtn.addEventListener('click', () => {
+            game.triggerManualConfetti();
+        });
+    }
 });

@@ -89,64 +89,106 @@
     pointer-events: auto;
 }
 
-/* Firework particles container */
+/* Confetti particles container */
 .firework-container {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    height: 400px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
     z-index: 9;
     opacity: 0;
     transition: opacity 0.3s ease;
+    overflow: hidden;
 }
 
 .firework-container.show {
     opacity: 1;
 }
 
+.firework-container.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
 .firework-particle {
     position: absolute;
-    width: 14px;
+    width: 8px;
     height: 14px;
-    border-radius: 50%;
+    border-radius: 0;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.95;
+    will-change: transform;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Different colored confetti pieces */
+.firework-particle:nth-child(8n+1) {
+    background: #FF6B6B;
+}
+
+.firework-particle:nth-child(8n+2) {
+    background: #4ECDC4;
+}
+
+.firework-particle:nth-child(8n+3) {
+    background: #FFE66D;
+}
+
+.firework-particle:nth-child(8n+4) {
+    background: #95E1D3;
+}
+
+.firework-particle:nth-child(8n+5) {
+    background: #F38181;
+}
+
+.firework-particle:nth-child(8n+6) {
+    background: #AA96DA;
+}
+
+.firework-particle:nth-child(8n+7) {
+    background: #FCBAD3;
+}
+
+.firework-particle:nth-child(8n+8) {
+    background: #A8E6CF;
+}
+
+#confetti-test-button {
+    position: fixed;
     top: 50%;
-    left: 50%;
-    animation: firework-burst 1.5s ease-out forwards;
+    right: 24px;
+    transform: translateY(-50%);
+    padding: 12px 18px;
+    border-radius: 999px;
+    border: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    background: var(--accent-color);
+    color: #fff;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    cursor: pointer;
+    z-index: 15;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
 }
 
-@keyframes firework-burst {
-    0% {
-        transform: translate(0, 0) scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(var(--tx), var(--ty)) scale(0);
-        opacity: 0;
-    }
+#confetti-test-button:hover {
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
 }
 
-/* Different colored particles */
-.firework-particle:nth-child(4n+1) {
-    background: #3498db;
-    box-shadow: 0 0 20px #3498db, 0 0 40px rgba(52, 152, 219, 0.5);
+#confetti-test-button:active {
+    transform: translateY(-50%) scale(0.98);
 }
 
-.firework-particle:nth-child(4n+2) {
-    background: #e74c3c;
-    box-shadow: 0 0 20px #e74c3c, 0 0 40px rgba(231, 76, 60, 0.5);
-}
-
-.firework-particle:nth-child(4n+3) {
-    background: #f39c12;
-    box-shadow: 0 0 20px #f39c12, 0 0 40px rgba(243, 156, 18, 0.5);
-}
-
-.firework-particle:nth-child(4n+4) {
-    background: #2ecc71;
-    box-shadow: 0 0 20px #2ecc71, 0 0 40px rgba(46, 204, 113, 0.5);
+#confetti-test-button.hide
+{
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Mobile responsiveness */
